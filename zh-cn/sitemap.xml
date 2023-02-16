@@ -2,30 +2,30 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://bychannel.githu.io/zh-cn/categories/</loc><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
+            <loc>https://bychannel.githu.io/</loc><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
                         rel="alternate"
                         hreflang="en"
-                        href="https://bychannel.githu.io/categories/"
+                        href="https://bychannel.githu.io/en/"
                         /><xhtml:link
                     rel="alternate"
                     hreflang="zh-cn"
-                    href="https://bychannel.githu.io/zh-cn/categories/"
+                    href="https://bychannel.githu.io/"
                     /></url><url>
-            <loc>https://bychannel.githu.io/zh-cn/</loc><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
+            <loc>https://bychannel.githu.io/categories/</loc><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
                         rel="alternate"
                         hreflang="en"
-                        href="https://bychannel.githu.io/"
+                        href="https://bychannel.githu.io/en/categories/"
                         /><xhtml:link
                     rel="alternate"
                     hreflang="zh-cn"
-                    href="https://bychannel.githu.io/zh-cn/"
+                    href="https://bychannel.githu.io/categories/"
                     /></url><url>
-            <loc>https://bychannel.githu.io/zh-cn/tags/</loc><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
+            <loc>https://bychannel.githu.io/tags/</loc><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
                         rel="alternate"
                         hreflang="en"
-                        href="https://bychannel.githu.io/tags/"
+                        href="https://bychannel.githu.io/en/tags/"
                         /><xhtml:link
                     rel="alternate"
                     hreflang="zh-cn"
-                    href="https://bychannel.githu.io/zh-cn/tags/"
+                    href="https://bychannel.githu.io/tags/"
                     /></url></urlset>
