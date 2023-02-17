@@ -2,7 +2,16 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://bychannel.githu.io/</loc><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
+            <loc>https://bychannel.githu.io/about/</loc><lastmod>2023-02-17T18:02:46&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
+                        rel="alternate"
+                        hreflang="en"
+                        href="https://bychannel.githu.io/en/about/"
+                        /><xhtml:link
+                    rel="alternate"
+                    hreflang="zh-cn"
+                    href="https://bychannel.githu.io/about/"
+                    /></url><url>
+            <loc>https://bychannel.githu.io/</loc><lastmod>2023-02-17T18:02:46&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
                         rel="alternate"
                         hreflang="en"
                         href="https://bychannel.githu.io/en/"
@@ -11,7 +20,7 @@
                     hreflang="zh-cn"
                     href="https://bychannel.githu.io/"
                     /></url><url>
-            <loc>https://bychannel.githu.io/categories/</loc><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
+            <loc>https://bychannel.githu.io/categories/</loc><lastmod>2023-02-17T18:02:46&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
                         rel="alternate"
                         hreflang="en"
                         href="https://bychannel.githu.io/en/categories/"
@@ -20,7 +29,7 @@
                     hreflang="zh-cn"
                     href="https://bychannel.githu.io/categories/"
                     /></url><url>
-            <loc>https://bychannel.githu.io/tags/</loc><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
+            <loc>https://bychannel.githu.io/tags/</loc><lastmod>2023-02-17T18:02:46&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
                         rel="alternate"
                         hreflang="en"
                         href="https://bychannel.githu.io/en/tags/"
@@ -28,4 +37,16 @@
                     rel="alternate"
                     hreflang="zh-cn"
                     href="https://bychannel.githu.io/tags/"
+                    /></url><url>
+            <loc>https://bychannel.githu.io/tags/installation/</loc><lastmod>2023-02-17T18:02:46&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://bychannel.githu.io/tags/content/</loc><lastmod>2023-02-17T18:02:46&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://bychannel.githu.io/tags/configuration/</loc><lastmod>2023-02-17T18:02:46&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://bychannel.githu.io/categories/documentation/</loc><lastmod>2023-02-17T18:02:46&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
+                        rel="alternate"
+                        hreflang="en"
+                        href="https://bychannel.githu.io/en/categories/documentation/"
+                        /><xhtml:link
+                    rel="alternate"
+                    hreflang="zh-cn"
+                    href="https://bychannel.githu.io/categories/documentation/"
                     /></url></urlset>
