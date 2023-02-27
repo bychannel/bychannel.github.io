@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>数据结构 - 标签 - 『池鱼』编程随想</title>
+        <link>https://bychannel.githu.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</link>
+        <description>数据结构 - 标签 - 『池鱼』编程随想</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1132431868@qq.com (池鱼)</managingEditor>
+            <webMaster>1132431868@qq.com (池鱼)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 15 Apr 2022 16:36:57 &#43;0800</lastBuildDate><atom:link href="https://bychannel.githu.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="self" type="application/rss+xml" /><item>
+    <title>go的set实现方案</title>
+    <link>https://bychannel.githu.io/go%E7%9A%84set%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%A1%88/</link>
+    <pubDate>Fri, 15 Apr 2022 16:36:57 &#43;0800</pubDate>
+    <author>池鱼</author>
+    <guid>https://bychannel.githu.io/go%E7%9A%84set%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%A1%88/</guid>
+    <description><![CDATA[Go 的设计是一种简单哲学，它摒弃了其他语言一些臃肿的功能和模块，以降低程序员的学习门槛，减少使用中的心智负担。 本文，我们来探讨 Go 中缺失的数据结]]></description>
+</item>
+</channel>
+</rss>
