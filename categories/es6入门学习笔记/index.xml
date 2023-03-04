@@ -1,0 +1,24 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>ES6入门学习笔记 - 分类 - 『池鱼』编程随想</title>
+        <link>https://bychannel.githu.io/categories/es6%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
+        <description>ES6入门学习笔记 - 分类 - 『池鱼』编程随想</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1132431868@qq.com (池鱼)</managingEditor>
+            <webMaster>1132431868@qq.com (池鱼)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 11 Feb 2021 16:36:57 &#43;0800</lastBuildDate><atom:link href="https://bychannel.githu.io/categories/es6%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="self" type="application/rss+xml" /><item>
+    <title>ES6笔记01:let和const命令</title>
+    <link>https://bychannel.githu.io/es6%E7%AC%94%E8%AE%B001/</link>
+    <pubDate>Thu, 11 Feb 2021 16:36:57 &#43;0800</pubDate>
+    <author>池鱼</author>
+    <guid>https://bychannel.githu.io/es6%E7%AC%94%E8%AE%B001/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>ES6笔记01:let和const命令</title>
+    <link>https://bychannel.githu.io/es6%E7%AC%94%E8%AE%B001/</link>
+    <pubDate>Thu, 11 Feb 2021 16:36:57 &#43;0800</pubDate>
+    <author>池鱼</author>
+    <guid>https://bychannel.githu.io/es6%E7%AC%94%E8%AE%B001/</guid>
+    <description><![CDATA[]]></description>
+</item>
+</channel>
+</rss>
