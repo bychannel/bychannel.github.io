@@ -1,4 +1,4 @@
-# noCopy机制
+# go的noCopy机制
 
 
 最近在读Go源码时发现高频注释语句“**XXX must not be copied after first use**“。例如sync包下的Pool、Cond、WaitGroup、Mutex、Map和atomoic.Vaule、strings.Builder等，都有该句注释。
