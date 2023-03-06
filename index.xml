@@ -7,6 +7,14 @@
             <webMaster>1132431868@qq.com (池鱼)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 07 Jun 2022 16:16:57 &#43;0800</lastBuildDate>
             <atom:link href="https://bychannel.githu.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>ES6笔记01</title>
+    <link>https://bychannel.githu.io/es6%E7%AC%94%E8%AE%B001/</link>
+    <pubDate>Tue, 07 Jun 2022 16:16:57 &#43;0800</pubDate>
+    <author>池鱼</author>
+    <guid>https://bychannel.githu.io/es6%E7%AC%94%E8%AE%B001/</guid>
+    <description><![CDATA[es6笔记..]]></description>
+</item>
+<item>
     <title>go的nil用法</title>
     <link>https://bychannel.githu.io/go%E7%9A%84nil%E7%94%A8%E6%B3%95/</link>
     <pubDate>Tue, 07 Jun 2022 16:16:57 &#43;0800</pubDate>
@@ -37,22 +45,6 @@
     <author>池鱼</author>
     <guid>https://bychannel.githu.io/go%E7%9A%84%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F02/</guid>
     <description><![CDATA[本文介绍 类型别名与类型定义。 类型别名 类型别名需要在别名和原类型之间加上赋值符号 = ，使用类型别名定义的类型与原类型等价，Go 语言内建的基本类型]]></description>
-</item>
-<item>
-    <title>ES6笔记01:let和const命令</title>
-    <link>https://bychannel.githu.io/es6%E7%AC%94%E8%AE%B001/</link>
-    <pubDate>Thu, 11 Feb 2021 16:36:57 &#43;0800</pubDate>
-    <author>池鱼</author>
-    <guid>https://bychannel.githu.io/es6%E7%AC%94%E8%AE%B001/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>ES6笔记01:let和const命令</title>
-    <link>https://bychannel.githu.io/es6%E7%AC%94%E8%AE%B001/</link>
-    <pubDate>Thu, 11 Feb 2021 16:36:57 &#43;0800</pubDate>
-    <author>池鱼</author>
-    <guid>https://bychannel.githu.io/es6%E7%AC%94%E8%AE%B001/</guid>
-    <description><![CDATA[]]></description>
 </item>
 <item>
     <title>go的noCopy机制</title>
