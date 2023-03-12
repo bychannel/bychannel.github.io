@@ -7,18 +7,18 @@
         <title>go的noCopy机制 - 池鱼的编程随想</title><meta name="Description" content="关注前沿技术发展，人生不止于编程，最近关注区块链和web3."><meta property="og:title" content="go的noCopy机制" />
 <meta property="og:description" content="最近在读Go源码时发现高频注释语句“XXX must not be copied after first use“。例如sync包下的Pool、Cond、WaitGroup、Mutex、Map" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://bychannel.githu.io/go%E7%9A%84nocopy%E6%9C%BA%E5%88%B6/" /><meta property="og:image" content="https://bychannel.githu.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://bychannel.github.io/go%E7%9A%84nocopy%E6%9C%BA%E5%88%B6/" /><meta property="og:image" content="https://bychannel.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-02-11T16:36:57+08:00" />
 <meta property="article:modified_time" content="2021-02-11T16:36:57+08:00" /><meta property="og:site_name" content="池鱼的编程随想" />
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://bychannel.githu.io/logo.png"/>
+<meta name="twitter:image" content="https://bychannel.github.io/logo.png"/>
 
 <meta name="twitter:title" content="go的noCopy机制"/>
 <meta name="twitter:description" content="最近在读Go源码时发现高频注释语句“XXX must not be copied after first use“。例如sync包下的Pool、Cond、WaitGroup、Mutex、Map"/>
 <meta name="application-name" content="池鱼的编程随想">
 <meta name="apple-mobile-web-app-title" content="池鱼的编程随想"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://bychannel.githu.io/go%E7%9A%84nocopy%E6%9C%BA%E5%88%B6/" /><link rel="next" href="https://bychannel.githu.io/go%E7%9A%84%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F02/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://bychannel.github.io/go%E7%9A%84nocopy%E6%9C%BA%E5%88%B6/" /><link rel="next" href="https://bychannel.github.io/go%E7%9A%84%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F02/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
     {
@@ -28,18 +28,18 @@
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:\/\/bychannel.githu.io\/go%E7%9A%84nocopy%E6%9C%BA%E5%88%B6\/"
+            "@id": "https:\/\/bychannel.github.io\/go%E7%9A%84nocopy%E6%9C%BA%E5%88%B6\/"
         },"image": [{
                             "@type": "ImageObject",
-                            "url": "https:\/\/bychannel.githu.io\/images\/Apple-Devices-Preview.png",
+                            "url": "https:\/\/bychannel.github.io\/images\/Apple-Devices-Preview.png",
                             "width":  3200 ,
                             "height":  2048 
                         }],"genre": "posts","keywords": "golang","wordcount":  1938 ,
-        "url": "https:\/\/bychannel.githu.io\/go%E7%9A%84nocopy%E6%9C%BA%E5%88%B6\/","datePublished": "2021-02-11T16:36:57+08:00","dateModified": "2021-02-11T16:36:57+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+        "url": "https:\/\/bychannel.github.io\/go%E7%9A%84nocopy%E6%9C%BA%E5%88%B6\/","datePublished": "2021-02-11T16:36:57+08:00","dateModified": "2021-02-11T16:36:57+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
                     "@type": "ImageObject",
-                    "url": "https:\/\/bychannel.githu.io\/images\/avatar.png",
+                    "url": "https:\/\/bychannel.github.io\/images\/avatar.png",
                     "width":  528 ,
                     "height":  560 
                 }},"author": {
@@ -468,7 +468,7 @@
                             <a class="link-to-markdown" href="/go%E7%9A%84nocopy%E6%9C%BA%E5%88%B6/index.md" target="_blank">阅读原始文档</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://bychannel.githu.io/go%E7%9A%84nocopy%E6%9C%BA%E5%88%B6/" data-title="go的noCopy机制" data-hashtags="golang"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://bychannel.githu.io/go%E7%9A%84nocopy%E6%9C%BA%E5%88%B6/" data-hashtag="golang"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://bychannel.githu.io/go%E7%9A%84nocopy%E6%9C%BA%E5%88%B6/" data-title="go的noCopy机制"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://bychannel.githu.io/go%E7%9A%84nocopy%E6%9C%BA%E5%88%B6/" data-title="go的noCopy机制"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://bychannel.githu.io/go%E7%9A%84nocopy%E6%9C%BA%E5%88%B6/" data-title="go的noCopy机制"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://bychannel.github.io/go%E7%9A%84nocopy%E6%9C%BA%E5%88%B6/" data-title="go的noCopy机制" data-hashtags="golang"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://bychannel.github.io/go%E7%9A%84nocopy%E6%9C%BA%E5%88%B6/" data-hashtag="golang"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://bychannel.github.io/go%E7%9A%84nocopy%E6%9C%BA%E5%88%B6/" data-title="go的noCopy机制"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://bychannel.github.io/go%E7%9A%84nocopy%E6%9C%BA%E5%88%B6/" data-title="go的noCopy机制"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://bychannel.github.io/go%E7%9A%84nocopy%E6%9C%BA%E5%88%B6/" data-title="go的noCopy机制"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>
