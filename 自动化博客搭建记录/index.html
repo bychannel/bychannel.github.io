@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>自动化博客搭建记录 - 池鱼的编程随想</title><meta name="Description" content="关注前沿技术发展，人生不止于编程，最近关注区块链和web3."><meta property="og:title" content="自动化博客搭建记录" />
+<meta property="og:description" content="这里记录一下hugo静态博客的搭建过程，本文假设你已经了解hugo、github、github pages的相关知识，不清楚可以先去googl" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://bychannel.github.io/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/" /><meta property="og:image" content="https://bychannel.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-06-07T16:16:57+08:00" />
+<meta property="article:modified_time" content="2020-06-07T16:16:57+08:00" /><meta property="og:site_name" content="池鱼的编程随想" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://bychannel.github.io/logo.png"/>
+
+<meta name="twitter:title" content="自动化博客搭建记录"/>
+<meta name="twitter:description" content="这里记录一下hugo静态博客的搭建过程，本文假设你已经了解hugo、github、github pages的相关知识，不清楚可以先去googl"/>
+<meta name="application-name" content="池鱼的编程随想">
+<meta name="apple-mobile-web-app-title" content="池鱼的编程随想"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://bychannel.github.io/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/" /><link rel="next" href="https://bychannel.github.io/%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0utterances%E8%AF%84%E8%AE%BA/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "自动化博客搭建记录",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/bychannel.github.io\/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/bychannel.github.io\/images\/Apple-Devices-Preview.png",
+                            "width":  3200 ,
+                            "height":  2048 
+                        }],"genre": "posts","keywords": "blog","wordcount":  2384 ,
+        "url": "https:\/\/bychannel.github.io\/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95\/","datePublished": "2020-06-07T16:16:57+08:00","dateModified": "2020-06-07T16:16:57+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/bychannel.github.io\/images\/avatar.png",
+                    "width":  528 ,
+                    "height":  560 
+                }},"author": {
+                "@type": "Person",
+                "name": "池鱼"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="池鱼的编程随想">池鱼的编程随想</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="https://github.com/bychannel" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw' aria-hidden='true'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="池鱼的编程随想">池鱼的编程随想</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="https://github.com/bychannel" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw' aria-hidden='true'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">自动化博客搭建记录</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>池鱼</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%85%B6%E4%BB%96/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>其他</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2020-06-07">2020-06-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 2384 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 5 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#博客源仓库">博客源仓库</a>
+          <ul>
+            <li><a href="#前提">前提</a></li>
+            <li><a href="#hugo工程">hugo工程</a></li>
+            <li><a href="#主题">主题</a></li>
+            <li><a href="#新建文章">新建文章</a></li>
+          </ul>
+        </li>
+        <li><a href="#pages仓库">pages仓库</a>
+          <ul>
+            <li><a href="#创建仓库">创建仓库</a></li>
+            <li><a href="#域名配置">域名配置</a></li>
+            <li><a href="#自动发布">自动发布</a></li>
+            <li><a href="#token配置">token配置</a></li>
+          </ul>
+        </li>
+        <li><a href="#总结">总结</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>这里记录一下hugo静态博客的搭建过程，本文假设你已经了解hugo、github、github pages的相关知识，不清楚可以先去google了解一下。</p>
+<p>我的方案主要分为以下几个核心部分：</p>
+<ol>
+<li>个人博客源仓库，对博客配置及所有文章 <code>.md</code> 源文件进行版本管理，配合 GitHub Action 进行自动化部署，自动生成静态站点推送到 GitHub Pages 博客发布仓库。</li>
+<li>GitHub Pages 博客发布仓库，以 <code>username.github.io</code> 形式命名的仓库，使用 GitHub Pages 实现网站部署，可以通过配置域名 CNAME 解析使用自定义域名。</li>
+<li>Hugo 主题仓库，fork 喜欢的主题，并对自己的个人定制化改造配置进行版本管理，通过 <code>git submodule</code> 的方式链接到个人博客源仓库。</li>
+</ol>
+<p>下文会对搭建、本地测试、自动化部署维护等过程进行详细讲解，希望对大家所有帮助。其他组件配置，如网站统计、评论系统等我们后面在慢慢补充。</p>
+<h3 id="博客源仓库">博客源仓库</h3>
+<p>其实这个就是hugo的源工程，我们最终会把这个源工程提交到git仓库中进行版本管理，这样，我们的文章也就有版本了，见本站的<a href="https://github.com/bychannel/blog" target="_blank" rel="noopener noreffer ">源工程</a></p>
+<h4 id="前提">前提</h4>
+<p>在此之前，你现在的环境中需要一下工具：</p>
+<ul>
+<li>
+<p>hugo，最好是带extend的扩展版本，在编译主题中带有scss文件会用上，<a href="https://github.com/gohugoio/hugo/releases" target="_blank" rel="noopener noreffer ">点此处</a></p>
+</li>
+<li>
+<p>git，部署到github用到的工具，没有安装的话，直接下最新版本就好了</p>
+</li>
+</ul>
+<h4 id="hugo工程">hugo工程</h4>
+<p>使用命令 <code>hugo new site blog</code> 就可以创建初始化一个hugo项目</p>
+<h4 id="主题">主题</h4>
+<p>我们先<a href="https://themes.gohugo.io" target="_blank" rel="noopener noreffer ">点这里</a>选择一个喜欢的主题，我的做法是fork了主题的github源码，自己如果有想法可以进行自定义修改，然后是把主题添加到hugo工程的themes目录下，这里建议使用子模块的方式进行添加：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git submodule add https://github.com/bychannel/LoveIt themes/LoveIt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>进入<code>themes/LoveIt/exampleSite</code>，这是主题的使用案例，可以直接复制config.toml文件覆盖hugo工程的配置，然后修改其中的参数，并参照<code>exampleSite</code>下的资源路径配置，文章路径，直接照搬使用即可，这样操作下来博客的雏形就好了。</p>
+<h4 id="新建文章">新建文章</h4>
+<p>现在可以尝试写一篇测试文章看看，直接使用命令<code>hugo new posts/test.md</code>就能生成一篇新文章，文件路径在<code>content/posts</code>下，或者我们可以直接进入该路径下，复制一个markdown文章进行改写。</p>
+<p>文章保存后，使用命令编译一下查看效果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">hugo server -D
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>打开<code>localhost:1313</code>就能进行预览，如果效果不好，我们还可以修改markdown或者toml配置文件，并能够在浏览器实时查看修改后的效果。</p>
+<h3 id="pages仓库">pages仓库</h3>
+<p>每次使用<code>hugo server</code>命令进行编译，会在public目录下生成网站的静态资源，这些html、css等资源就是我们在浏览器中看到的页面了，我们需要单独把他发布出去。</p>
+<h4 id="创建仓库">创建仓库</h4>
+<p>GitHub Pages 项目需要符合 <code>username.github.io</code> 的特殊命名格式，仓库建立完成后，可以在设置中配置自己注册的自定义域名来指向 GitHub Pages 生成的网址。此外，需要将博客站点配置文件 <code>config.toml</code> 中的 <code>baseURL</code> 改为自己的自定义域名，这样博客站点才能正常访问 GitHub Pages 生成的网站服务。</p>
+<h4 id="域名配置">域名配置</h4>
+<p>如果你购买了域名，不使用默认的<code>username.github.io</code>，那你需要在购买域名的后台系统进行域名重定向配置，这里我没有购买域名，就不再进行演示了，自己实操一下应该是没问题的。</p>
+<h4 id="自动发布">自动发布</h4>
+<p>能自动化处理的事情，我们绝不手动处理，不仅仅是重复的劳动，更是因为手动更加容易出错。</p>
+<p>因为我们的博客基于 GitHub 与 GitHub Pages，可以通过官方提供的 GitHub Action 进行 CI 自动发布，下面我会进行详细讲解。GitHub Action 是一个持续集成和持续交付(CI/CD) 平台，可用于自动执行构建、测试和部署管道，目前已经有很多开发好的工作流，可以通过简单的配置即可直接使用。</p>
+<p>配置在仓库目录 <code>.github/workflows</code> 下，以 <code>.yml</code> 为后缀。我的 GitHub Action <a href="https://github.com/bychannel/blog/blob/main/.github/workflows/deploy.yml" target="_blank" rel="noopener noreffer ">配置</a>，自动发布示例配置如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">deploy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">on</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">push</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">workflow_dispatch</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">schedule</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c"># Runs everyday at 8:00 AM</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">cron</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;0 0 * * *&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l">ubuntu-latest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Checkout</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">actions/checkout@v2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="nt">submodules</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="nt">fetch-depth</span><span class="p">:</span><span class="w"> </span><span class="m">0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Setup Hugo</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">peaceiris/actions-hugo@v2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="nt">hugo-version</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;latest&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="nt">extended</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Build Web</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l">hugo</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Deploy Web</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">peaceiris/actions-gh-pages@v3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="nt">PERSONAL_TOKEN</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.PERSONAL_TOKEN }}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="nt">EXTERNAL_REPOSITORY</span><span class="p">:</span><span class="w"> </span><span class="l">bychannel/bychannel.github.io</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="nt">PUBLISH_BRANCH</span><span class="p">:</span><span class="w"> </span><span class="l">main</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="nt">PUBLISH_DIR</span><span class="p">:</span><span class="w"> </span><span class="l">./public</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                  </span><span class="nt">commit_message</span><span class="p">:</span><span class="w"> </span><span class="l">${{ github.event.head_commit.message }}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>on</code> 表示 GitHub Action 触发条件，我设置了 <code>push</code>、<code>workflow_dispatch</code> 和 <code>schedule</code> 三个条件：</p>
+<ul>
+<li><code>push</code>，当这个项目仓库发生推送动作后，执行 GitHub Action</li>
+<li><code>workflow_dispatch</code>，可以在 GitHub 项目仓库的 Action 工具栏进行手动调用</li>
+<li><code>schedule</code>，定时执行 GitHub Action，如我的设置为北京时间每天早上执行，主要是使用一些自动化统计 CI 来自动更新我博客的关于页面</li>
+</ul>
+<p><code>jobs</code> 表示 GitHub Action 中的任务，我们设置了一个 <code>build</code> 任务，<code>runs-on</code> 表示 GitHub Action 运行环境，我们选择了 <code>ubuntu-latest</code>。我们的 <code>build</code> 任务包含了 <code>Checkout</code>、<code>Setup Hugo</code>、<code>Build Web</code> 和 <code>Deploy Web</code> 四个主要步骤，其中 <code>run</code> 是执行的命令，<code>uses</code> 是 GitHub Action 中的一个插件，我们使用了 <code>peaceiris/actions-hugo@v2</code> 和 <code>peaceiris/actions-gh-pages@v3</code> 这两个插件。其中 <code>Checkout</code> 步骤中 <code>with</code> 中配置 <code>submodules</code> 值为 <code>true</code> 可以同步博客源仓库的子模块，即我们的主题模块。</p>
+<p>大家可以根据自己的实际情况进行配置改写，然后加入到工程的对应路径下，github会按照配置自动执行。</p>
+<h4 id="token配置">token配置</h4>
+<p>因为我们需要从一个git仓库push到另一个git仓库，那么需要进行对应的token配置，以便推送的时候能正确的进行权限认证。</p>
+<p>首先要在 GitHub 账户下 <code>Setting - Developer setting - Personal access tokens - Tokens(classic)</code> 下创建一个 Token。权限需要开启 <code>repo</code> 与 <code>workflow</code>，选择永不过期。</p>
+<p>配置后复制生成的 Token（注：只会出现一次），然后在我们博客源仓库的 <code>Settings - Secrets and variables - Actions</code> 中，添加密钥 <code>PERSONAL_TOKEN</code> 为刚才的 Token，这样 GitHub Action 就可以获取到 Token 了。</p>
+<p>完成上述配置后，推送代码至仓库，即可触发 GitHub Action，自动生成博客页面并推送至 GitHub Pages 仓库。</p>
+<h3 id="总结">总结</h3>
+<p>以上就是我通过 Hugo 与 GitHub Action 实现的博客自动部署系统，我自己的实现仓库如下：</p>
+<p>博客源码仓库 <a href="https://github.com/bychannel/blog" target="_blank" rel="noopener noreffer ">https://github.com/bychannel/blog</a>，</p>
+<p>主题仓库 <a href="https://github.com/bychannel/LoveIt" target="_blank" rel="noopener noreffer ">https://github.com/bychannel/LoveIt</a> ，</p>
+<p>发布仓库 <a href="https://github.com/bychannel/bychannel.github.io" target="_blank" rel="noopener noreffer ">https://github.com/bychannel/bychannel.github.io</a></p>
+<p>这样整理下来，我们不仅可以随时修改整个博客，而且流程全自动化，我们只需要专注于产出文章，然后提交到源仓库就可以了。</p>
+<p>如果还有不清楚或者没讲明白的地方，大家可以下面评论区提出来讨论一下。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-06-07</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://bychannel.github.io/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/" data-title="自动化博客搭建记录" data-hashtags="blog"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://bychannel.github.io/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/" data-hashtag="blog"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://bychannel.github.io/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/" data-title="自动化博客搭建记录"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://bychannel.github.io/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/" data-title="自动化博客搭建记录"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://bychannel.github.io/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/" data-title="自动化博客搭建记录"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/blog/">blog</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+            <a href="/%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0utterances%E8%AF%84%E8%AE%BA/" class="next" rel="next" title="博客添加utterances评论">博客添加utterances评论<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="utterances" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.111.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">池鱼</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/algoliasearch@4.13.1/dist/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"comment","lightTheme":"github-light","repo":"bychannel/bychannel.github.io"}},"search":{"algoliaAppID":"PASDMWALPK","algoliaIndex":"index.zh-cn","algoliaSearchKey":"b42948e51daaa93df92381c8e2ac0f93","highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"algolia"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
