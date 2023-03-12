@@ -1,6 +1,6 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>『池鱼』编程随想</title>
+        <title>池鱼的编程随想</title>
         <link>https://bychannel.githu.io/</link>
         <description>关注前沿技术发展，人生不止于编程，最近关注区块链和web3.</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1132431868@qq.com (池鱼)</managingEditor>
