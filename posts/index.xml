@@ -29,6 +29,14 @@
     <description><![CDATA[Go 的设计是一种简单哲学，它摒弃了其他语言一些臃肿的功能和模块，以降低程序员的学习门槛，减少使用中的心智负担。 本文，我们来探讨 Go 中缺失的数据结]]></description>
 </item>
 <item>
+    <title>go循环引用优化思路</title>
+    <link>https://bychannel.github.io/go%E5%BE%AA%E7%8E%AF%E5%BC%95%E7%94%A8%E4%BC%98%E5%8C%96%E6%80%9D%E8%B7%AF/</link>
+    <pubDate>Mon, 04 Apr 2022 14:16:27 &#43;0800</pubDate>
+    <author>池鱼</author>
+    <guid>https://bychannel.github.io/go%E5%BE%AA%E7%8E%AF%E5%BC%95%E7%94%A8%E4%BC%98%E5%8C%96%E6%80%9D%E8%B7%AF/</guid>
+    <description><![CDATA[前言 golang是一门极具设计哲学的语言，其中一点是没有支持包循环导入，目的是迫使 Go 程序员更多地考虑程序的依赖关系。一方面保持依赖关系图的简]]></description>
+</item>
+<item>
     <title>go的类型系统01</title>
     <link>https://bychannel.github.io/go%E7%9A%84%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F01/</link>
     <pubDate>Tue, 13 Apr 2021 13:16:57 &#43;0800</pubDate>
