@@ -37,6 +37,14 @@
     <description><![CDATA[前言 golang是一门极具设计哲学的语言，其中一点是没有支持包循环导入，目的是迫使 Go 程序员更多地考虑程序的依赖关系。一方面保持依赖关系图的简]]></description>
 </item>
 <item>
+    <title>如何生成go包的uml类图</title>
+    <link>https://bychannel.github.io/%E7%94%9F%E6%88%90go%E5%8C%85uml%E7%B1%BB%E5%9B%BE/</link>
+    <pubDate>Tue, 11 Jan 2022 11:26:57 &#43;0800</pubDate>
+    <author>池鱼</author>
+    <guid>https://bychannel.github.io/%E7%94%9F%E6%88%90go%E5%8C%85uml%E7%B1%BB%E5%9B%BE/</guid>
+    <description><![CDATA[GoLand内置的Diagrams功能不像IDEA一样强大，不支持生成类图。解决方案是利用github上的 PlantUML 类图生成器：jfeliu007/]]></description>
+</item>
+<item>
     <title>go的类型系统01</title>
     <link>https://bychannel.github.io/go%E7%9A%84%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F01/</link>
     <pubDate>Tue, 13 Apr 2021 13:16:57 &#43;0800</pubDate>
