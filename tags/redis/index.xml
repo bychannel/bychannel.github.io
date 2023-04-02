@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>redis - 标签 - 池鱼的编程随想</title>
+        <link>https://bychannel.github.io/tags/redis/</link>
+        <description>redis - 标签 - 池鱼的编程随想</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1132431868@qq.com (池鱼)</managingEditor>
+            <webMaster>1132431868@qq.com (池鱼)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 13 Jul 2022 19:20:57 &#43;0800</lastBuildDate><atom:link href="https://bychannel.github.io/tags/redis/" rel="self" type="application/rss+xml" /><item>
+    <title>redis超时重试小结</title>
+    <link>https://bychannel.github.io/redis%E8%B6%85%E6%97%B6%E9%87%8D%E8%AF%95%E5%B0%8F%E7%BB%93/</link>
+    <pubDate>Wed, 13 Jul 2022 19:20:57 &#43;0800</pubDate>
+    <author>池鱼</author>
+    <guid>https://bychannel.github.io/redis%E8%B6%85%E6%97%B6%E9%87%8D%E8%AF%95%E5%B0%8F%E7%BB%93/</guid>
+    <description><![CDATA[在互联网服务中，特别是在云环境下，网络及硬件环境复杂，所有应用程序都可能遇到暂时性故障。暂时性故障包括瞬时的网络抖动，服务暂时不可用，服务繁]]></description>
+</item>
+</channel>
+</rss>

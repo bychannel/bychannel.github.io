@@ -4,7 +4,15 @@
         <link>https://bychannel.github.io/posts/</link>
         <description>所有文章 | 池鱼的编程随想</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1132431868@qq.com (池鱼)</managingEditor>
-            <webMaster>1132431868@qq.com (池鱼)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 07 Jun 2022 16:16:57 &#43;0800</lastBuildDate><atom:link href="https://bychannel.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>1132431868@qq.com (池鱼)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 13 Jul 2022 19:20:57 &#43;0800</lastBuildDate><atom:link href="https://bychannel.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>redis超时重试小结</title>
+    <link>https://bychannel.github.io/redis%E8%B6%85%E6%97%B6%E9%87%8D%E8%AF%95%E5%B0%8F%E7%BB%93/</link>
+    <pubDate>Wed, 13 Jul 2022 19:20:57 &#43;0800</pubDate>
+    <author>池鱼</author>
+    <guid>https://bychannel.github.io/redis%E8%B6%85%E6%97%B6%E9%87%8D%E8%AF%95%E5%B0%8F%E7%BB%93/</guid>
+    <description><![CDATA[在互联网服务中，特别是在云环境下，网络及硬件环境复杂，所有应用程序都可能遇到暂时性故障。暂时性故障包括瞬时的网络抖动，服务暂时不可用，服务繁]]></description>
+</item>
+<item>
     <title>ES6笔记01</title>
     <link>https://bychannel.github.io/es6%E7%AC%94%E8%AE%B001/</link>
     <pubDate>Tue, 07 Jun 2022 16:16:57 &#43;0800</pubDate>
@@ -75,14 +83,6 @@
     <author>池鱼</author>
     <guid>https://bychannel.github.io/%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0utterances%E8%AF%84%E8%AE%BA/</guid>
     <description><![CDATA[建立博客以来，试用了多款评论系统，不过最终还是用了 disqus，但是 disqus 令人讨厌的是默认添加很多烦人的广告，牛皮癣一样，而且在国内无法加载，必]]></description>
-</item>
-<item>
-    <title>自动化博客搭建记录</title>
-    <link>https://bychannel.github.io/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/</link>
-    <pubDate>Sun, 07 Jun 2020 16:16:57 &#43;0800</pubDate>
-    <author>池鱼</author>
-    <guid>https://bychannel.github.io/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/</guid>
-    <description><![CDATA[这里记录一下hugo静态博客的搭建过程，本文假设你已经了解hugo、github、github pages的相关知识，不清楚可以先去googl]]></description>
 </item>
 </channel>
 </rss>

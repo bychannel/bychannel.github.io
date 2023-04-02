@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>redis超时重试小结 - 池鱼的编程随想</title><meta name="Description" content="关注前沿技术发展，人生不止于编程，最近关注区块链和web3."><meta property="og:title" content="redis超时重试小结" />
+<meta property="og:description" content="在互联网服务中，特别是在云环境下，网络及硬件环境复杂，所有应用程序都可能遇到暂时性故障。暂时性故障包括瞬时的网络抖动，服务暂时不可用，服务繁" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://bychannel.github.io/redis%E8%B6%85%E6%97%B6%E9%87%8D%E8%AF%95%E5%B0%8F%E7%BB%93/" /><meta property="og:image" content="https://bychannel.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-07-13T19:20:57+08:00" />
+<meta property="article:modified_time" content="2022-07-13T19:20:57+08:00" /><meta property="og:site_name" content="池鱼的编程随想" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://bychannel.github.io/logo.png"/>
+
+<meta name="twitter:title" content="redis超时重试小结"/>
+<meta name="twitter:description" content="在互联网服务中，特别是在云环境下，网络及硬件环境复杂，所有应用程序都可能遇到暂时性故障。暂时性故障包括瞬时的网络抖动，服务暂时不可用，服务繁"/>
+<meta name="application-name" content="池鱼的编程随想">
+<meta name="apple-mobile-web-app-title" content="池鱼的编程随想"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://bychannel.github.io/redis%E8%B6%85%E6%97%B6%E9%87%8D%E8%AF%95%E5%B0%8F%E7%BB%93/" /><link rel="prev" href="https://bychannel.github.io/es6%E7%AC%94%E8%AE%B001/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "redis超时重试小结",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/bychannel.github.io\/redis%E8%B6%85%E6%97%B6%E9%87%8D%E8%AF%95%E5%B0%8F%E7%BB%93\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/bychannel.github.io\/images\/Apple-Devices-Preview.png",
+                            "width":  3200 ,
+                            "height":  2048 
+                        }],"genre": "posts","keywords": "redis","wordcount":  1469 ,
+        "url": "https:\/\/bychannel.github.io\/redis%E8%B6%85%E6%97%B6%E9%87%8D%E8%AF%95%E5%B0%8F%E7%BB%93\/","datePublished": "2022-07-13T19:20:57+08:00","dateModified": "2022-07-13T19:20:57+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/bychannel.github.io\/images\/avatar.png",
+                    "width":  528 ,
+                    "height":  560 
+                }},"author": {
+                "@type": "Person",
+                "name": "池鱼"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="池鱼的编程随想">池鱼的编程随想</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="https://github.com/bychannel" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw' aria-hidden='true'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="池鱼的编程随想">池鱼的编程随想</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="https://github.com/bychannel" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw' aria-hidden='true'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">redis超时重试小结</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>池鱼</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E7%BC%96%E7%A8%8B/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>编程</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-07-13">2022-07-13</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 1469 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#为什么会出现暂时性故障">为什么会出现暂时性故障</a>
+          <ul>
+            <li><a href="#云-redis-集群的高可用">云 Redis 集群的高可用</a></li>
+            <li><a href="#客户已知的慢查询瞬间打满redis">客户已知的慢查询瞬间打满Redis</a></li>
+            <li><a href="#复杂的网络环境">复杂的网络环境</a></li>
+          </ul>
+        </li>
+        <li><a href="#重试的准则">重试的准则</a>
+          <ul>
+            <li><a href="#适当的重试次数与间隔">适当的重试次数与间隔</a></li>
+            <li><a href="#避免重试嵌套">避免重试嵌套</a></li>
+            <li><a href="#记录重试过程异常但只有最终失败被报告">记录重试过程异常，但只有最终失败被报告</a></li>
+            <li><a href="#超时之后不一定就可以重试">超时之后不一定就可以重试</a></li>
+            <li><a href="#幂等操作才能重试">幂等操作才能重试</a></li>
+          </ul>
+        </li>
+        <li><a href="#redis-常见客户端如何做重试">Redis 常见客户端如何做重试</a></li>
+      </ul>
+    </li>
+    <li><a href="#总结">总结</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>在互联网服务中，特别是在云环境下，网络及硬件环境复杂，所有应用程序都可能遇到暂时性故障。暂时性故障包括瞬时的网络抖动，服务暂时不可用，服务繁忙导致超时等，这些故障通常可以自我修复，在间隔一定时间后重试，则很大概率可以成功。 ​</p>
+<h3 id="为什么会出现暂时性故障">为什么会出现暂时性故障</h3>
+<h4 id="云-redis-集群的高可用">云 Redis 集群的高可用</h4>
+<p>云 Redis 集群或者云环境中的很多产品，都是由大量机器组成的集群提供服务，机器可能发生各种各样的硬件故障，比如 CPU，内存，磁盘 都可能发生故障。当故障发生时，Redis 服务会自动做 HA (High Available)，切换备用节点上来，客户端则可能遇到连接闪断，节点只读 （主动 HA 流程需要对主禁止写入，从而让数据完整同步到备）等暂时性故障。 ​</p>
+<h4 id="客户已知的慢查询瞬间打满redis">客户已知的慢查询瞬间打满Redis</h4>
+<p>如果 Redis 在定期执行一些已知的慢查询，比如（keys, hgetall, smembers）等复杂度为 O(N) 的操作，则可能导致其余 O(1) 复杂度的 API 出现暂时性失败。 ​</p>
+<h4 id="复杂的网络环境">复杂的网络环境</h4>
+<p>云上网络环境复杂，客户端和服务器之间的网络状况会不时改变，偶现网络抖动，数据包重传等问题。</p>
+<h3 id="重试的准则">重试的准则</h3>
+<h4 id="适当的重试次数与间隔">适当的重试次数与间隔</h4>
+<p>必须优化重试次数与间隔。如果重试次数不足或者间隔太长，应用程序无法完成操作，并且可能失败。如果重试次数太多或者间隔太短，则可能会增大程序对系统资源的占用，且有可能造成服务端堆积太多请求无法恢复。确定适当的重试间隔是最困难的部分，常见的重试间隔如指数退让、增量间隔、固定间隔[1]等。</p>
+<h4 id="避免重试嵌套">避免重试嵌套</h4>
+<p>大多数情况下，应该避免重试嵌套，嵌套容易造成反复重试且无法停止。 ​</p>
+<h4 id="记录重试过程异常但只有最终失败被报告">记录重试过程异常，但只有最终失败被报告</h4>
+<p>重试过程中，建议按照 WARN 级别打印重试的错误日志，但是只有最终重试失败时候才抛出 Exception，重试过程中如果能完成请求的正确访问，则不会打扰到用户。 ​</p>
+<h4 id="超时之后不一定就可以重试">超时之后不一定就可以重试</h4>
+<p>超时是一种未决现象，配置超时时间 2s，那么客户端通常的行为是当命令发送之后开始计时，如果在 2s 内没有成功收到回复，则客户端抛出 Timeout Exception。但此时服务端有没有执行过命令呢？是未决的，因为超时可能发生在任何阶段：</p>
+<ul>
+<li>命令被客户端发出，但是还没有到达 Redis</li>
+<li>命令到达 Redis，但是执行时候超时</li>
+<li>命令执行结束，但是结果返回客户端时候超时</li>
+</ul>
+<p>因此，对于有的命令，超时之后就不一定可以重试，是否可以重试的准则是命令执行是否幂等。</p>
+<h4 id="幂等操作才能重试">幂等操作才能重试</h4>
+<p>需要确定重试的操作是否为幂等的，例如：</p>
+<ul>
+<li>set a b，就是幂等的，多次执行最终 a 的值只可能为 b 或者失败。</li>
+<li>lpush list a，就不是幂等的，如果多次 lpush list a，则 list 中可能包含多个 a 元素。</li>
+</ul>
+<h3 id="redis-常见客户端如何做重试">Redis 常见客户端如何做重试</h3>
+<p>Redis 客户端开源生态繁荣，几乎各个编程语言都有对应的 Redis 客户端，Redis 官网（<a href="https://redis.io/clients" target="_blank" rel="noopener noreffer ">https://redis.io/clients</a>）列出了很多 Redis 客户端，下面我们用go-redis客户端讨论如何做重试。</p>
+<p>对于go-redis客户端来说，在<code>Options</code>中已经提供了超时的相关配置，我们只需要在调用<code>NewClient</code>方法时，传入我们创建好的<code>Options</code>结构即可，这样我们创建好的client就具备了超时重试的能力。</p>
+<p>配置如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// 最大重试次数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">MaxRetries</span> <span class="kt">int</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 重试间隔最小backoff值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">MinRetryBackoff</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 重试间隔最大backoff值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">MaxRetryBackoff</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 链接超时
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">DialTimeout</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 读超时
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">ReadTimeout</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 写超时
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">WriteTimeout</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>默认的重试次数是3次，每次重试的时间间隔是根据backoff算法计算出来的，也就是上面配置的最大backoff和最小backoff两个配置，所有超时相关的重试机制，都是由上面三个配置决定的。</p>
+<h2 id="总结">总结</h2>
+<p>本文总结了 Redis 导致超时的一些原因，为什么需要做重试，以及重试应当遵循的准则。并举例了go-redis客户端如何做重试。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2022-07-13</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/redis%E8%B6%85%E6%97%B6%E9%87%8D%E8%AF%95%E5%B0%8F%E7%BB%93/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://bychannel.github.io/redis%E8%B6%85%E6%97%B6%E9%87%8D%E8%AF%95%E5%B0%8F%E7%BB%93/" data-title="redis超时重试小结" data-hashtags="redis"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://bychannel.github.io/redis%E8%B6%85%E6%97%B6%E9%87%8D%E8%AF%95%E5%B0%8F%E7%BB%93/" data-hashtag="redis"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://bychannel.github.io/redis%E8%B6%85%E6%97%B6%E9%87%8D%E8%AF%95%E5%B0%8F%E7%BB%93/" data-title="redis超时重试小结"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://bychannel.github.io/redis%E8%B6%85%E6%97%B6%E9%87%8D%E8%AF%95%E5%B0%8F%E7%BB%93/" data-title="redis超时重试小结"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://bychannel.github.io/redis%E8%B6%85%E6%97%B6%E9%87%8D%E8%AF%95%E5%B0%8F%E7%BB%93/" data-title="redis超时重试小结"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/redis/">redis</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/es6%E7%AC%94%E8%AE%B001/" class="prev" rel="prev" title="ES6笔记01"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>ES6笔记01</a></div>
+</div>
+<div id="comments"><div id="utterances" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.111.3">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">池鱼</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/algoliasearch@4.13.1/dist/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"comment","lightTheme":"github-light","repo":"bychannel/bychannel.github.io"}},"search":{"algoliaAppID":"PASDMWALPK","algoliaIndex":"index.zh-cn","algoliaSearchKey":"b42948e51daaa93df92381c8e2ac0f93","highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"algolia"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
