@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>编译 - 标签 - 池鱼的编程随想</title>
+        <link>https://bychannel.github.io/tags/%E7%BC%96%E8%AF%91/</link>
+        <description>编译 - 标签 - 池鱼的编程随想</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1132431868@qq.com (池鱼)</managingEditor>
+            <webMaster>1132431868@qq.com (池鱼)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 12 Jun 2021 12:36:57 &#43;0800</lastBuildDate><atom:link href="https://bychannel.github.io/tags/%E7%BC%96%E8%AF%91/" rel="self" type="application/rss+xml" /><item>
+    <title>go程序编译优化</title>
+    <link>https://bychannel.github.io/go%E7%A8%8B%E5%BA%8F%E7%BC%96%E8%AF%91%E4%BC%98%E5%8C%96/</link>
+    <pubDate>Sat, 12 Jun 2021 12:36:57 &#43;0800</pubDate>
+    <author>池鱼</author>
+    <guid>https://bychannel.github.io/go%E7%A8%8B%E5%BA%8F%E7%BC%96%E8%AF%91%E4%BC%98%E5%8C%96/</guid>
+    <description><![CDATA[gcflags go build 可以用 -gcflags 给 go 编译器传入参数，也就是传给 go tool compile 的参数，因此可以用 go tool compile --help 查看所有可用的参数。 常⽤参数 -m 开启内存分配分析(逃逸)。可以帮助]]></description>
+</item>
+</channel>
+</rss>
