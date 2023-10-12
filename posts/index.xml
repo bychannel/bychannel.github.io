@@ -13,14 +13,6 @@
     <description><![CDATA[在互联网服务中，特别是在云环境下，网络及硬件环境复杂，所有应用程序都可能遇到暂时性故障。暂时性故障包括瞬时的网络抖动，服务暂时不可用，服务繁]]></description>
 </item>
 <item>
-    <title>ES6笔记01</title>
-    <link>https://bychannel.github.io/es6%E7%AC%94%E8%AE%B001/</link>
-    <pubDate>Tue, 07 Jun 2022 16:16:57 &#43;0800</pubDate>
-    <author>池鱼</author>
-    <guid>https://bychannel.github.io/es6%E7%AC%94%E8%AE%B001/</guid>
-    <description><![CDATA[es6笔记..]]></description>
-</item>
-<item>
     <title>go的nil用法</title>
     <link>https://bychannel.github.io/go%E7%9A%84nil%E7%94%A8%E6%B3%95/</link>
     <pubDate>Tue, 07 Jun 2022 16:16:57 &#43;0800</pubDate>
@@ -51,6 +43,14 @@
     <author>池鱼</author>
     <guid>https://bychannel.github.io/%E7%94%9F%E6%88%90go%E5%8C%85uml%E7%B1%BB%E5%9B%BE/</guid>
     <description><![CDATA[GoLand内置的Diagrams功能不像IDEA一样强大，不支持生成类图。解决方案是利用github上的 PlantUML 类图生成器：jfeliu007/]]></description>
+</item>
+<item>
+    <title>【转载】git子模块入门</title>
+    <link>https://bychannel.github.io/git%E5%AD%90%E6%A8%A1%E5%9D%97%E5%85%A5%E9%97%A8/</link>
+    <pubDate>Mon, 15 Nov 2021 16:26:57 &#43;0800</pubDate>
+    <author>池鱼</author>
+    <guid>https://bychannel.github.io/git%E5%AD%90%E6%A8%A1%E5%9D%97%E5%85%A5%E9%97%A8/</guid>
+    <description><![CDATA[注：本文转载自 Git: submodule 子模块简明教程 | A Quest After Perspectives 如有侵权，联系删除 有种情况我们经常会遇到：某个工作中的项目需要包含并使用另一个项目。 也许是第三方库]]></description>
 </item>
 <item>
     <title>go的类型系统01</title>

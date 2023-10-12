@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>git - 标签 - 池鱼的编程随想</title>
+        <link>https://bychannel.github.io/tags/git/</link>
+        <description>git - 标签 - 池鱼的编程随想</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1132431868@qq.com (池鱼)</managingEditor>
+            <webMaster>1132431868@qq.com (池鱼)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 15 Nov 2021 16:26:57 &#43;0800</lastBuildDate><atom:link href="https://bychannel.github.io/tags/git/" rel="self" type="application/rss+xml" /><item>
+    <title>【转载】git子模块入门</title>
+    <link>https://bychannel.github.io/git%E5%AD%90%E6%A8%A1%E5%9D%97%E5%85%A5%E9%97%A8/</link>
+    <pubDate>Mon, 15 Nov 2021 16:26:57 &#43;0800</pubDate>
+    <author>池鱼</author>
+    <guid>https://bychannel.github.io/git%E5%AD%90%E6%A8%A1%E5%9D%97%E5%85%A5%E9%97%A8/</guid>
+    <description><![CDATA[注：本文转载自 Git: submodule 子模块简明教程 | A Quest After Perspectives 如有侵权，联系删除 有种情况我们经常会遇到：某个工作中的项目需要包含并使用另一个项目。 也许是第三方库]]></description>
+</item>
+</channel>
+</rss>

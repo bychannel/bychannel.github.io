@@ -157,11 +157,11 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">package_i</span>
-</span></span><span class="line"><span class="cl"><span class="err"> </span>
+</span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">PackageAInterface</span> <span class="kd">interface</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"> <span class="nf">PrintA</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="err"> </span>
+</span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">PackageBInterface</span> <span class="kd">interface</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"> <span class="nf">PrintB</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
@@ -194,20 +194,20 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">package_a</span>
-</span></span><span class="line"><span class="cl"><span class="err"> </span>
+</span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
 </span></span><span class="line"><span class="cl"> <span class="s">&#34;cycle/package_i&#34;</span>
 </span></span><span class="line"><span class="cl"> <span class="s">&#34;fmt&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="err"> </span>
+</span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">PackageA</span> <span class="kd">struct</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"> <span class="nx">B</span> <span class="nx">package_i</span><span class="p">.</span><span class="nx">PackageBInterface</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="err"> </span>
+</span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">a</span> <span class="nx">PackageA</span><span class="p">)</span> <span class="nf">PrintA</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;I&#39;m a!&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="err"> </span>
+</span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">a</span> <span class="nx">PackageA</span><span class="p">)</span> <span class="nf">PrintAll</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"> <span class="nx">a</span><span class="p">.</span><span class="nf">PrintA</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl"> <span class="nx">a</span><span class="p">.</span><span class="nx">B</span><span class="p">.</span><span class="nf">PrintB</span><span class="p">()</span>
@@ -241,20 +241,20 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">package_b</span>
-</span></span><span class="line"><span class="cl"><span class="err"> </span>
+</span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
 </span></span><span class="line"><span class="cl"> <span class="s">&#34;cycle/package_i&#34;</span>
 </span></span><span class="line"><span class="cl"> <span class="s">&#34;fmt&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="err"> </span>
+</span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">PackageB</span> <span class="kd">struct</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"> <span class="nx">A</span> <span class="nx">package_i</span><span class="p">.</span><span class="nx">PackageAInterface</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="err"> </span>
+</span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">b</span> <span class="nx">PackageB</span><span class="p">)</span> <span class="nf">PrintB</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;I&#39;m b!&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="err"> </span>
+</span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">b</span> <span class="nx">PackageB</span><span class="p">)</span> <span class="nf">PrintAll</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"> <span class="nx">b</span><span class="p">.</span><span class="nf">PrintB</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl"> <span class="nx">b</span><span class="p">.</span><span class="nx">A</span><span class="p">.</span><span class="nf">PrintA</span><span class="p">()</span>
@@ -284,12 +284,12 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
-</span></span><span class="line"><span class="cl"><span class="err"> </span>
+</span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
 </span></span><span class="line"><span class="cl"> <span class="s">&#34;cycle/package_a&#34;</span>
 </span></span><span class="line"><span class="cl"> <span class="s">&#34;cycle/package_b&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="err"> </span>
+</span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"> <span class="nx">a</span> <span class="o">:=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">package_a</span><span class="p">.</span><span class="nx">PackageA</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"> <span class="nx">b</span> <span class="o">:=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">package_b</span><span class="p">.</span><span class="nx">PackageB</span><span class="p">)</span>
@@ -366,13 +366,13 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
-</span></span><span class="line"><span class="cl"><span class="err"> </span>
+</span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
 </span></span><span class="line"><span class="cl"> <span class="s">&#34;cycle/package_a&#34;</span>
 </span></span><span class="line"><span class="cl"> <span class="s">&#34;cycle/package_b&#34;</span>
 </span></span><span class="line"><span class="cl"> <span class="s">&#34;cycle/package_c&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="err"> </span>
+</span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"> <span class="nx">a</span> <span class="o">:=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">package_a</span><span class="p">.</span><span class="nx">PackageA</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"> <span class="nx">b</span> <span class="o">:=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">package_b</span><span class="p">.</span><span class="nx">PackageB</span><span class="p">)</span>
@@ -425,22 +425,22 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">callback_mgr</span>
-</span></span><span class="line"><span class="cl"><span class="err"> </span>
+</span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
 </span></span><span class="line"><span class="cl"> <span class="s">&#34;fmt&#34;</span>
 </span></span><span class="line"><span class="cl"> <span class="s">&#34;reflect&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="err"> </span>
+</span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">callBackMap</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">interface</span><span class="p">{}</span>
-</span></span><span class="line"><span class="cl"><span class="err"> </span>
+</span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">init</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"> <span class="nx">callBackMap</span> <span class="p">=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">interface</span><span class="p">{})</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="err"> </span>
+</span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">RegisterCallBack</span><span class="p">(</span><span class="nx">key</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">callBack</span> <span class="kd">interface</span><span class="p">{})</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"> <span class="nx">callBackMap</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="p">=</span> <span class="nx">callBack</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="err"> </span>
+</span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">CallBackFunc</span><span class="p">(</span><span class="nx">key</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">args</span> <span class="o">...</span><span class="kd">interface</span><span class="p">{})</span> <span class="p">[]</span><span class="kd">interface</span><span class="p">{}</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"> <span class="k">if</span> <span class="nx">callBack</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">callBackMap</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span> <span class="nx">ok</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"> <span class="nx">in</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="nx">reflect</span><span class="p">.</span><span class="nx">Value</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="nx">args</span><span class="p">))</span>
@@ -489,23 +489,23 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">package_a</span>
-</span></span><span class="line"><span class="cl"><span class="err"> </span>
+</span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
 </span></span><span class="line"><span class="cl"> <span class="s">&#34;cycle/callback_mgr&#34;</span>
 </span></span><span class="line"><span class="cl"> <span class="s">&#34;fmt&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="err"> </span>
+</span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">init</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"> <span class="nx">callback_mgr</span><span class="p">.</span><span class="nf">RegisterCallBack</span><span class="p">(</span><span class="s">&#34;getA&#34;</span><span class="p">,</span> <span class="nb">new</span><span class="p">(</span><span class="nx">PackageA</span><span class="p">).</span><span class="nx">GetA</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="err"> </span>
+</span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">PackageA</span> <span class="kd">struct</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="err"> </span>
+</span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">a</span> <span class="nx">PackageA</span><span class="p">)</span> <span class="nf">GetA</span><span class="p">()</span> <span class="kt">string</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"> <span class="k">return</span> <span class="s">&#34;I&#39;m a!&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="err"> </span>
+</span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">a</span> <span class="nx">PackageA</span><span class="p">)</span> <span class="nf">PrintAll</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nf">GetA</span><span class="p">())</span>
 </span></span><span class="line"><span class="cl"> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">callback_mgr</span><span class="p">.</span><span class="nf">CallBackFunc</span><span class="p">(</span><span class="s">&#34;getB&#34;</span><span class="p">)[</span><span class="mi">0</span><span class="p">].(</span><span class="kt">string</span><span class="p">))</span>
@@ -542,23 +542,23 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">package_b</span>
-</span></span><span class="line"><span class="cl"><span class="err"> </span>
+</span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
 </span></span><span class="line"><span class="cl"> <span class="s">&#34;cycle/callback_mgr&#34;</span>
 </span></span><span class="line"><span class="cl"> <span class="s">&#34;fmt&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="err"> </span>
+</span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">init</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"> <span class="nx">callback_mgr</span><span class="p">.</span><span class="nf">RegisterCallBack</span><span class="p">(</span><span class="s">&#34;getB&#34;</span><span class="p">,</span> <span class="nb">new</span><span class="p">(</span><span class="nx">PackageB</span><span class="p">).</span><span class="nx">GetB</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="err"> </span>
+</span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">PackageB</span> <span class="kd">struct</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="err"> </span>
+</span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">b</span> <span class="nx">PackageB</span><span class="p">)</span> <span class="nf">GetB</span><span class="p">()</span> <span class="kt">string</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"> <span class="k">return</span> <span class="s">&#34;I&#39;m b!&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="err"> </span>
+</span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">b</span> <span class="nx">PackageB</span><span class="p">)</span> <span class="nf">PrintAll</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">b</span><span class="p">.</span><span class="nf">GetB</span><span class="p">())</span>
 </span></span><span class="line"><span class="cl"> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">callback_mgr</span><span class="p">.</span><span class="nf">CallBackFunc</span><span class="p">(</span><span class="s">&#34;getA&#34;</span><span class="p">)[</span><span class="mi">0</span><span class="p">].(</span><span class="kt">string</span><span class="p">))</span>
@@ -586,12 +586,12 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
-</span></span><span class="line"><span class="cl"><span class="err"> </span>
+</span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
 </span></span><span class="line"><span class="cl"> <span class="s">&#34;cycle/package_a&#34;</span>
 </span></span><span class="line"><span class="cl"> <span class="s">&#34;cycle/package_b&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="err"> </span>
+</span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"> <span class="nx">a</span> <span class="o">:=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">package_a</span><span class="p">.</span><span class="nx">PackageA</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"> <span class="nx">b</span> <span class="o">:=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">package_b</span><span class="p">.</span><span class="nx">PackageB</span><span class="p">)</span>
@@ -633,25 +633,25 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">eventBus</span>
-</span></span><span class="line"><span class="cl"><span class="err"> </span>
+</span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
 </span></span><span class="line"><span class="cl"> <span class="s">&#34;github.com/asaskevich/EventBus&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="err"> </span>
+</span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">globalEventBus</span> <span class="nx">EventBus</span><span class="p">.</span><span class="nx">Bus</span>
-</span></span><span class="line"><span class="cl"><span class="err"> </span>
+</span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">init</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"> <span class="nx">globalEventBus</span> <span class="p">=</span> <span class="nx">EventBus</span><span class="p">.</span><span class="nf">New</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="err"> </span>
+</span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">Subscribe</span><span class="p">(</span><span class="nx">topic</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">fn</span> <span class="kd">interface</span><span class="p">{})</span> <span class="kt">error</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"> <span class="k">return</span> <span class="nx">globalEventBus</span><span class="p">.</span><span class="nf">Subscribe</span><span class="p">(</span><span class="nx">topic</span><span class="p">,</span> <span class="nx">fn</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="err"> </span>
+</span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">SubscribeAsync</span><span class="p">(</span><span class="nx">topic</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">fn</span> <span class="kd">interface</span><span class="p">{},</span> <span class="nx">transactional</span> <span class="kt">bool</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"> <span class="k">return</span> <span class="nx">globalEventBus</span><span class="p">.</span><span class="nf">SubscribeAsync</span><span class="p">(</span><span class="nx">topic</span><span class="p">,</span> <span class="nx">fn</span><span class="p">,</span> <span class="nx">transactional</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="err"> </span>
+</span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">Publish</span><span class="p">(</span><span class="nx">topic</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">args</span> <span class="o">...</span><span class="kd">interface</span><span class="p">{})</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"> <span class="nx">globalEventBus</span><span class="p">.</span><span class="nf">Publish</span><span class="p">(</span><span class="nx">topic</span><span class="p">,</span> <span class="nx">args</span><span class="o">...</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
@@ -687,23 +687,23 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">package_a</span>
-</span></span><span class="line"><span class="cl"><span class="err"> </span>
+</span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
 </span></span><span class="line"><span class="cl"> <span class="s">&#34;cycle/eventBus&#34;</span>
 </span></span><span class="line"><span class="cl"> <span class="s">&#34;fmt&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="err"> </span>
+</span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">init</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"> <span class="nx">eventBus</span><span class="p">.</span><span class="nf">Subscribe</span><span class="p">(</span><span class="s">&#34;PrintA&#34;</span><span class="p">,</span> <span class="nb">new</span><span class="p">(</span><span class="nx">PackageA</span><span class="p">).</span><span class="nx">PrintA</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="err"> </span>
+</span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">PackageA</span> <span class="kd">struct</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="err"> </span>
+</span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">a</span> <span class="nx">PackageA</span><span class="p">)</span> <span class="nf">PrintA</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;I&#39;m a!&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="err"> </span>
+</span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">a</span> <span class="nx">PackageA</span><span class="p">)</span> <span class="nf">PrintAll</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"> <span class="nx">a</span><span class="p">.</span><span class="nf">PrintA</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl"> <span class="nx">eventBus</span><span class="p">.</span><span class="nf">Publish</span><span class="p">(</span><span class="s">&#34;PrintB&#34;</span><span class="p">)</span>
@@ -740,23 +740,23 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">package_b</span>
-</span></span><span class="line"><span class="cl"><span class="err"> </span>
+</span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
 </span></span><span class="line"><span class="cl"> <span class="s">&#34;cycle/eventBus&#34;</span>
 </span></span><span class="line"><span class="cl"> <span class="s">&#34;fmt&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="err"> </span>
+</span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">init</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"> <span class="nx">eventBus</span><span class="p">.</span><span class="nf">Subscribe</span><span class="p">(</span><span class="s">&#34;PrintB&#34;</span><span class="p">,</span> <span class="nb">new</span><span class="p">(</span><span class="nx">PackageB</span><span class="p">).</span><span class="nx">PrintB</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="err"> </span>
+</span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">PackageB</span> <span class="kd">struct</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="err"> </span>
+</span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">b</span> <span class="nx">PackageB</span><span class="p">)</span> <span class="nf">PrintB</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;I&#39;m b!&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="err"> </span>
+</span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">b</span> <span class="nx">PackageB</span><span class="p">)</span> <span class="nf">PrintAll</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"> <span class="nx">b</span><span class="p">.</span><span class="nf">PrintB</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl"> <span class="nx">eventBus</span><span class="p">.</span><span class="nf">Publish</span><span class="p">(</span><span class="s">&#34;PrintA&#34;</span><span class="p">)</span>
@@ -793,7 +793,7 @@
                 Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">utterances</a>.
             </noscript></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.112.6">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.119.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
                 </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">池鱼</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>
