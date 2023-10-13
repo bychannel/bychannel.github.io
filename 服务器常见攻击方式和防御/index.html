@@ -4,38 +4,38 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>博客添加utterances评论 - 池鱼的编程随想</title><meta name="Description" content="关注前沿技术发展，人生不止于编程，最近关注区块链和web3."><meta property="og:title" content="博客添加utterances评论" />
-<meta property="og:description" content="建立博客以来，试用了多款评论系统，不过最终还是用了 disqus，但是 disqus 令人讨厌的是默认添加很多烦人的广告，牛皮癣一样，而且在国内无法加载，必" />
+        <title>【转载】服务器常见攻击方式和防御 - 池鱼的编程随想</title><meta name="Description" content="关注前沿技术发展，人生不止于编程，最近关注区块链和web3."><meta property="og:title" content="【转载】服务器常见攻击方式和防御" />
+<meta property="og:description" content="注：本文转载自 https://www.jianshu.com/p/a010f55ac805 如有侵权，联系删除 游戏服务器不管是个人的还是企业的，被攻击都是，很常见的，在所难免的。特别是游戏新上线时，都要承受的住哪些外" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://bychannel.github.io/%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0utterances%E8%AF%84%E8%AE%BA/" /><meta property="og:image" content="https://bychannel.github.io/logo.png"/><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2020-06-09T14:19:57+08:00" />
-<meta property="article:modified_time" content="2020-06-09T14:19:57+08:00" /><meta property="og:site_name" content="池鱼的编程随想" />
+<meta property="og:url" content="https://bychannel.github.io/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B8%B8%E8%A7%81%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F%E5%92%8C%E9%98%B2%E5%BE%A1/" /><meta property="og:image" content="https://bychannel.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-06-23T17:16:27+08:00" />
+<meta property="article:modified_time" content="2022-06-23T17:16:27+08:00" /><meta property="og:site_name" content="池鱼的编程随想" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://bychannel.github.io/logo.png"/>
 
-<meta name="twitter:title" content="博客添加utterances评论"/>
-<meta name="twitter:description" content="建立博客以来，试用了多款评论系统，不过最终还是用了 disqus，但是 disqus 令人讨厌的是默认添加很多烦人的广告，牛皮癣一样，而且在国内无法加载，必"/>
+<meta name="twitter:title" content="【转载】服务器常见攻击方式和防御"/>
+<meta name="twitter:description" content="注：本文转载自 https://www.jianshu.com/p/a010f55ac805 如有侵权，联系删除 游戏服务器不管是个人的还是企业的，被攻击都是，很常见的，在所难免的。特别是游戏新上线时，都要承受的住哪些外"/>
 <meta name="application-name" content="池鱼的编程随想">
 <meta name="apple-mobile-web-app-title" content="池鱼的编程随想"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://bychannel.github.io/%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0utterances%E8%AF%84%E8%AE%BA/" /><link rel="prev" href="https://bychannel.github.io/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/" /><link rel="next" href="https://bychannel.github.io/go%E7%9A%84select-case%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://bychannel.github.io/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B8%B8%E8%A7%81%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F%E5%92%8C%E9%98%B2%E5%BE%A1/" /><link rel="prev" href="https://bychannel.github.io/go%E7%9A%84nil%E7%94%A8%E6%B3%95/" /><link rel="next" href="https://bychannel.github.io/redis%E8%B6%85%E6%97%B6%E9%87%8D%E8%AF%95%E5%B0%8F%E7%BB%93/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "博客添加utterances评论",
+        "headline": "【转载】服务器常见攻击方式和防御",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:\/\/bychannel.github.io\/%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0utterances%E8%AF%84%E8%AE%BA\/"
+            "@id": "https:\/\/bychannel.github.io\/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B8%B8%E8%A7%81%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F%E5%92%8C%E9%98%B2%E5%BE%A1\/"
         },"image": [{
                             "@type": "ImageObject",
                             "url": "https:\/\/bychannel.github.io\/images\/Apple-Devices-Preview.png",
                             "width":  3200 ,
                             "height":  2048 
-                        }],"genre": "posts","keywords": "blog","wordcount":  564 ,
-        "url": "https:\/\/bychannel.github.io\/%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0utterances%E8%AF%84%E8%AE%BA\/","datePublished": "2020-06-09T14:19:57+08:00","dateModified": "2020-06-09T14:19:57+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "服务器, 安全","wordcount":  1003 ,
+        "url": "https:\/\/bychannel.github.io\/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B8%B8%E8%A7%81%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F%E5%92%8C%E9%98%B2%E5%BE%A1\/","datePublished": "2022-06-23T17:16:27+08:00","dateModified": "2022-06-23T17:16:27+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
                     "@type": "ImageObject",
@@ -111,81 +111,59 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">目录</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">博客添加utterances评论</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>池鱼</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%85%B6%E4%BB%96/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>其他</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2020-06-09">2020-06-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 564 字&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">【转载】服务器常见攻击方式和防御</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>池鱼</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E7%BC%96%E7%A8%8B/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>编程</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-06-23">2022-06-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 1003 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
                     <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
-            </div><div class="content" id="content"><p>建立博客以来，试用了多款评论系统，不过最终还是用了 disqus，但是 disqus 令人讨厌的是默认添加很多烦人的广告，牛皮癣一样，而且在国内无法加载，必须翻墙才能显示。<a href="https://utteranc.es/" target="_blank" rel="noopener noreffer ">utterances</a> 是一款基于 github issues 的评论系统，简洁，避免了 disqus 的广告以及加载问题。这篇文章总结如何给 LoveIt 主题添加 utterances 评论系统。</p>
-<p><strong>注：该主题已经支持了utterances，所以我们只需要简单配置就能使用，如果你使用的主题还不支持，需要按照文档进行代码嵌入</strong></p>
-<p>操作如下：</p>
-<ol>
-<li>
-<p>建立一个 public GitHub 仓库，这个仓库的 issue 用来存放博客评论：如果自己的博客就是用 GitHub pages 建立的，那么就不需要额外建立仓库了，就用博客的仓库也可以。例如我的博客放在 <a href="https://github.com/bychannel/bychannel.github.io" target="_blank" rel="noopener noreffer ">bychannel/bychannel.github.io</a>这个仓库，就可以用这个仓库存放博客的评论。</p>
-</li>
-<li>
-<p>安装 <a href="https://github.com/apps/utterances" target="_blank" rel="noopener noreffer ">utterances 的 app</a>：install 以后，在 <code>Repository access</code>，选择 <code>Only select repositories</code>，然后选择自己建立的用来存放评论的仓库即可。这时，进入到对应仓库的设置界面，点击 <code>Integrations</code>，会看到 utterances 的 app。</p>
-</li>
-<li>
-<p>Hugo 对应的设置：主题已经支持了 utterances，在博客的 <code>config.toml</code> 配置文件，加入下面的配置：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="p">[</span><span class="nx">params</span><span class="p">.</span><span class="nx">page</span><span class="p">.</span><span class="nx">comment</span><span class="p">.</span><span class="nx">utterances</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">enable</span> <span class="p">=</span> <span class="kc">true</span>
-</span></span><span class="line"><span class="cl">  <span class="c"># owner/repo</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">repo</span> <span class="p">=</span> <span class="s2">&#34;bychannel/bychannel.github.io&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">issueTerm</span> <span class="p">=</span> <span class="s2">&#34;pathname&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">label</span> <span class="p">=</span> <span class="s2">&#34;comment&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">lightTheme</span> <span class="p">=</span> <span class="s2">&#34;github-light&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">darkTheme</span> <span class="p">=</span> <span class="s2">&#34;github-dark&#34;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div></li>
-<li>
-<p>重新 deploy Hugo 博客，等博客更新以后，utterances 评论系统即可生效。</p>
-</li>
-</ol>
-<p>要在博客文章下面评论，只需要登录自己的 GitHub 账号即可。</p>
+            </div><div class="content" id="content"><blockquote>
+<p>注：本文转载自 <a href="https://www.jianshu.com/p/a010f55ac805" target="_blank" rel="noopener noreffer ">https://www.jianshu.com/p/a010f55ac805</a></p>
+<p>如有侵权，联系删除</p>
+</blockquote>
+<p>游戏服务器不管是个人的还是企业的，被攻击都是，很常见的，在所难免的。特别是游戏新上线时，都要承受的住哪些外来压力，玩家突然猛增，被攻击等等。如果承受不住可能会直接宣布游戏倒闭。这里我们一起来说说游戏服务器为什么老被攻击的一些原因和怎么防御游戏服务器。</p>
+<p><strong>游戏服务器常见的几种攻击</strong></p>
+<p><strong>被DDOS攻击：</strong> DDoS攻击运用服务器技能将多台计算机联合起来，一起向一个或是多个方针游戏服务器发送DDoS进犯，以提高进犯游戏服务器的威力。游戏服务器在被进犯的时候会占用消耗掉服务器的资源，严峻直接导致游戏服务器瘫痪，使得游戏服务器没办法正常运转。</p>
+<p><strong>被CC攻击：</strong> CC攻击是攻击者控制某些主机不停地发大量数据包给对方游戏服务器造成服务器资源耗尽，一直到宕机崩溃。CC攻击能够让你见不到真实源IP，见不到特别大的异常流量，但却能造成服务器无法进行正常连接。而且这种攻击技术含量低，是很多攻击者最常使用的一种攻击手法。</p>
+<p><strong>被SYN攻击：</strong> SYN攻击主要是利用TCP协议缺陷，通过发送大量的半连接请求，耗费对方游戏服务器的CPU和内存资源，使其游戏网站运行缓慢，严重者引起网络堵塞甚至系统瘫痪。SYN攻击实现起来非常的简单，不管目标是什么系统，只要这些系统打开TCP服务就可以实施。SYN攻击除了能影响主机外，还可以危害路由器、防火墙等网络系统。</p>
+<p><strong>游戏服务器被攻击了如何防御</strong></p>
+<p>1、确保服务器系统安全</p>
+<p>管理员需对所有主机进行检查，知道访问者的来源，查看网络设备和主机/服务器系统的日志，并且使用工具来过滤不必要的服务和端口，限制同时打开的SYN半连接数目，确保服务器的系统文件是最新的版本,并及时更新系统补丁。</p>
+<p>2、在骨干节点配置防火墙</p>
+<p>防火墙本身能抵御DDoS攻击和其他一些攻击。在发现游戏服务器受到攻击的时候，可以将攻击导向一些牺牲主机，这样可以保护真正的主机不被攻击。</p>
+<p>3、使用CDN加速服务</p>
+<p>高防CDN加速具有防御各种攻击的功能，因此要解决游戏网站安全添加CDN加速是不可缺少的。CDN加速不仅对游戏网站进行了加速，同时可以将所有的域名和子域都使用CDN来解析，隐藏真实IP地址，保护网站安全。</p>
+<p>4、购买第三方防御</p>
+<p>高防服务器是游戏里相当火爆的防御DDoS的方式之一，价格便宜，是此种方式最重要的优势。客户可以在凌晨完成服务器的数据迁移，这样能将损失降到最小，先选择较低的防御机器，后期攻击高了，直接一键升级防御，比较方便。</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2020-06-09</span>
+                <span>更新于 2022-06-23</span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
-                            <a class="link-to-markdown" href="/%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0utterances%E8%AF%84%E8%AE%BA/index.md" target="_blank">阅读原始文档</a>
+                            <a class="link-to-markdown" href="/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B8%B8%E8%A7%81%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F%E5%92%8C%E9%98%B2%E5%BE%A1/index.md" target="_blank">阅读原始文档</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://bychannel.github.io/%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0utterances%E8%AF%84%E8%AE%BA/" data-title="博客添加utterances评论" data-hashtags="blog"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://bychannel.github.io/%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0utterances%E8%AF%84%E8%AE%BA/" data-hashtag="blog"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://bychannel.github.io/%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0utterances%E8%AF%84%E8%AE%BA/" data-title="博客添加utterances评论"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://bychannel.github.io/%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0utterances%E8%AF%84%E8%AE%BA/" data-title="博客添加utterances评论"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://bychannel.github.io/%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0utterances%E8%AF%84%E8%AE%BA/" data-title="博客添加utterances评论"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://bychannel.github.io/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B8%B8%E8%A7%81%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F%E5%92%8C%E9%98%B2%E5%BE%A1/" data-title="【转载】服务器常见攻击方式和防御" data-hashtags="服务器,安全"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://bychannel.github.io/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B8%B8%E8%A7%81%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F%E5%92%8C%E9%98%B2%E5%BE%A1/" data-hashtag="服务器"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://bychannel.github.io/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B8%B8%E8%A7%81%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F%E5%92%8C%E9%98%B2%E5%BE%A1/" data-title="【转载】服务器常见攻击方式和防御"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://bychannel.github.io/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B8%B8%E8%A7%81%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F%E5%92%8C%E9%98%B2%E5%BE%A1/" data-title="【转载】服务器常见攻击方式和防御"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://bychannel.github.io/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B8%B8%E8%A7%81%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F%E5%92%8C%E9%98%B2%E5%BE%A1/" data-title="【转载】服务器常见攻击方式和防御"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/blog/">blog</a></section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>,&nbsp;<a href="/tags/%E5%AE%89%E5%85%A8/">安全</a></section>
         <section>
             <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
         </section>
     </div>
 
-    <div class="post-nav"><a href="/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/" class="prev" rel="prev" title="自动化博客搭建记录"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>自动化博客搭建记录</a>
-            <a href="/go%E7%9A%84select-case%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6/" class="next" rel="next" title="go的select-case实现机制">go的select-case实现机制<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+    <div class="post-nav"><a href="/go%E7%9A%84nil%E7%94%A8%E6%B3%95/" class="prev" rel="prev" title="go的nil用法"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>go的nil用法</a>
+            <a href="/redis%E8%B6%85%E6%97%B6%E9%87%8D%E8%AF%95%E5%B0%8F%E7%BB%93/" class="next" rel="next" title="redis超时重试小结">redis超时重试小结<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 <div id="comments"><div id="utterances" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">utterances</a>.

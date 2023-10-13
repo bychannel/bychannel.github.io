@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>服务器 - 标签 - 池鱼的编程随想</title>
+        <link>https://bychannel.github.io/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/</link>
+        <description>服务器 - 标签 - 池鱼的编程随想</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1132431868@qq.com (池鱼)</managingEditor>
+            <webMaster>1132431868@qq.com (池鱼)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 23 Jun 2022 17:16:27 &#43;0800</lastBuildDate><atom:link href="https://bychannel.github.io/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="self" type="application/rss+xml" /><item>
+    <title>【转载】服务器常见攻击方式和防御</title>
+    <link>https://bychannel.github.io/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B8%B8%E8%A7%81%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F%E5%92%8C%E9%98%B2%E5%BE%A1/</link>
+    <pubDate>Thu, 23 Jun 2022 17:16:27 &#43;0800</pubDate>
+    <author>池鱼</author>
+    <guid>https://bychannel.github.io/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B8%B8%E8%A7%81%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F%E5%92%8C%E9%98%B2%E5%BE%A1/</guid>
+    <description><![CDATA[注：本文转载自 https://www.jianshu.com/p/a010f55ac805 如有侵权，联系删除 游戏服务器不管是个人的还是企业的，被攻击都是，很常见的，在所难免的。特别是游戏新上线时，都要承受的住哪些外]]></description>
+</item>
+</channel>
+</rss>

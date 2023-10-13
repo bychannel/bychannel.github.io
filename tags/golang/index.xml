@@ -68,5 +68,13 @@
     <guid>https://bychannel.github.io/go%E7%9A%84nocopy%E6%9C%BA%E5%88%B6/</guid>
     <description><![CDATA[最近在读Go源码时发现高频注释语句“XXX must not be copied after first use“。例如sync包下的Pool、Cond、WaitGroup、Mutex、Map]]></description>
 </item>
+<item>
+    <title>go的select-case实现机制</title>
+    <link>https://bychannel.github.io/go%E7%9A%84select-case%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6/</link>
+    <pubDate>Fri, 10 Jul 2020 17:30:57 &#43;0800</pubDate>
+    <author>池鱼</author>
+    <guid>https://bychannel.github.io/go%E7%9A%84select-case%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6/</guid>
+    <description><![CDATA[chan操作规则 在介绍select-case实现机制之前，最好先了解下chan操作规则，明白goroutine何时阻塞，又在什么时机被唤醒，]]></description>
+</item>
 </channel>
 </rss>
