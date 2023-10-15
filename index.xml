@@ -23,6 +23,14 @@
     <description><![CDATA[注：本文转载自 https://www.jianshu.com/p/a010f55ac805 如有侵权，联系删除 游戏服务器不管是个人的还是企业的，被攻击都是，很常见的，在所难免的。特别是游戏新上线时，都要承受的住哪些外]]></description>
 </item>
 <item>
+    <title>【转载】使用具名返回值巧妙解决泛型函数返回零值的问题</title>
+    <link>https://bychannel.github.io/%E4%BD%BF%E7%94%A8%E5%85%B7%E5%90%8D%E8%BF%94%E5%9B%9E%E5%80%BC%E5%B7%A7%E5%A6%99%E8%A7%A3%E5%86%B3%E6%B3%9B%E5%9E%8B%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E9%9B%B6%E5%80%BC%E7%9A%84%E9%97%AE%E9%A2%98/</link>
+    <pubDate>Sat, 18 Jun 2022 15:10:27 &#43;0800</pubDate>
+    <author>池鱼</author>
+    <guid>https://bychannel.github.io/%E4%BD%BF%E7%94%A8%E5%85%B7%E5%90%8D%E8%BF%94%E5%9B%9E%E5%80%BC%E5%B7%A7%E5%A6%99%E8%A7%A3%E5%86%B3%E6%B3%9B%E5%9E%8B%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E9%9B%B6%E5%80%BC%E7%9A%84%E9%97%AE%E9%A2%98/</guid>
+    <description><![CDATA[注：本文转载自 https://tonybai.com/2022/05/20/solving-problems-in-generic-function-implementation-using-named-return-values/ 如有侵权，联系删除 Go语言泛型语法特性在Go 1.18版本落地后，不出所料，在github上看到大量的基础容器类型数据结构被用]]></description>
+</item>
+<item>
     <title>go的nil用法</title>
     <link>https://bychannel.github.io/go%E7%9A%84nil%E7%94%A8%E6%B3%95/</link>
     <pubDate>Tue, 07 Jun 2022 16:16:57 &#43;0800</pubDate>
@@ -71,20 +79,12 @@
     <description><![CDATA[GoLand内置的Diagrams功能不像IDEA一样强大，不支持生成类图。解决方案是利用github上的 PlantUML 类图生成器：jfeliu007/]]></description>
 </item>
 <item>
-    <title>【转载】git子模块入门</title>
-    <link>https://bychannel.github.io/git%E5%AD%90%E6%A8%A1%E5%9D%97%E5%85%A5%E9%97%A8/</link>
-    <pubDate>Mon, 15 Nov 2021 16:26:57 &#43;0800</pubDate>
+    <title>浅析mongo的三种集群方案</title>
+    <link>https://bychannel.github.io/%E6%B5%85%E6%9E%90mongo%E7%9A%84%E4%B8%89%E7%A7%8D%E9%9B%86%E7%BE%A4%E6%96%B9%E6%A1%88/</link>
+    <pubDate>Sun, 09 Jan 2022 20:15:57 &#43;0800</pubDate>
     <author>池鱼</author>
-    <guid>https://bychannel.github.io/git%E5%AD%90%E6%A8%A1%E5%9D%97%E5%85%A5%E9%97%A8/</guid>
-    <description><![CDATA[注：本文转载自 Git: submodule 子模块简明教程 | A Quest After Perspectives 如有侵权，联系删除 有种情况我们经常会遇到：某个工作中的项目需要包含并使用另一个项目。 也许是第三方库]]></description>
-</item>
-<item>
-    <title>go程序编译优化</title>
-    <link>https://bychannel.github.io/go%E7%A8%8B%E5%BA%8F%E7%BC%96%E8%AF%91%E4%BC%98%E5%8C%96/</link>
-    <pubDate>Sat, 12 Jun 2021 12:36:57 &#43;0800</pubDate>
-    <author>池鱼</author>
-    <guid>https://bychannel.github.io/go%E7%A8%8B%E5%BA%8F%E7%BC%96%E8%AF%91%E4%BC%98%E5%8C%96/</guid>
-    <description><![CDATA[gcflags go build 可以用 -gcflags 给 go 编译器传入参数，也就是传给 go tool compile 的参数，因此可以用 go tool compile --help 查看所有可用的参数。 常⽤参数 -m 开启内存分配分析(逃逸)。可以帮助]]></description>
+    <guid>https://bychannel.github.io/%E6%B5%85%E6%9E%90mongo%E7%9A%84%E4%B8%89%E7%A7%8D%E9%9B%86%E7%BE%A4%E6%96%B9%E6%A1%88/</guid>
+    <description><![CDATA[MongoDb有三种部署方式：主从复制（Master-Slaver）、副本集（Replica Set）、分片（Sharding） Master-Slaver 是一种主从副]]></description>
 </item>
 </channel>
 </rss>

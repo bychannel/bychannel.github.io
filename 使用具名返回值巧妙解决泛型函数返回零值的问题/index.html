@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>【转载】使用具名返回值巧妙解决泛型函数返回零值的问题 - 池鱼的编程随想</title><meta name="Description" content="关注前沿技术发展，人生不止于编程"><meta property="og:title" content="【转载】使用具名返回值巧妙解决泛型函数返回零值的问题" />
+<meta property="og:description" content="注：本文转载自 https://tonybai.com/2022/05/20/solving-problems-in-generic-function-implementation-using-named-return-values/ 如有侵权，联系删除 Go语言泛型语法特性在Go 1.18版本落地后，不出所料，在github上看到大量的基础容器类型数据结构被用" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://bychannel.github.io/%E4%BD%BF%E7%94%A8%E5%85%B7%E5%90%8D%E8%BF%94%E5%9B%9E%E5%80%BC%E5%B7%A7%E5%A6%99%E8%A7%A3%E5%86%B3%E6%B3%9B%E5%9E%8B%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E9%9B%B6%E5%80%BC%E7%9A%84%E9%97%AE%E9%A2%98/" /><meta property="og:image" content="https://bychannel.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-06-18T15:10:27+08:00" />
+<meta property="article:modified_time" content="2022-06-18T15:10:27+08:00" /><meta property="og:site_name" content="池鱼的编程随想" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://bychannel.github.io/logo.png"/>
+
+<meta name="twitter:title" content="【转载】使用具名返回值巧妙解决泛型函数返回零值的问题"/>
+<meta name="twitter:description" content="注：本文转载自 https://tonybai.com/2022/05/20/solving-problems-in-generic-function-implementation-using-named-return-values/ 如有侵权，联系删除 Go语言泛型语法特性在Go 1.18版本落地后，不出所料，在github上看到大量的基础容器类型数据结构被用"/>
+<meta name="application-name" content="池鱼的编程随想">
+<meta name="apple-mobile-web-app-title" content="池鱼的编程随想"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://bychannel.github.io/%E4%BD%BF%E7%94%A8%E5%85%B7%E5%90%8D%E8%BF%94%E5%9B%9E%E5%80%BC%E5%B7%A7%E5%A6%99%E8%A7%A3%E5%86%B3%E6%B3%9B%E5%9E%8B%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E9%9B%B6%E5%80%BC%E7%9A%84%E9%97%AE%E9%A2%98/" /><link rel="prev" href="https://bychannel.github.io/go%E7%9A%84nil%E7%94%A8%E6%B3%95/" /><link rel="next" href="https://bychannel.github.io/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B8%B8%E8%A7%81%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F%E5%92%8C%E9%98%B2%E5%BE%A1/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "【转载】使用具名返回值巧妙解决泛型函数返回零值的问题",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/bychannel.github.io\/%E4%BD%BF%E7%94%A8%E5%85%B7%E5%90%8D%E8%BF%94%E5%9B%9E%E5%80%BC%E5%B7%A7%E5%A6%99%E8%A7%A3%E5%86%B3%E6%B3%9B%E5%9E%8B%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E9%9B%B6%E5%80%BC%E7%9A%84%E9%97%AE%E9%A2%98\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/bychannel.github.io\/images\/Apple-Devices-Preview.png",
+                            "width":  3200 ,
+                            "height":  2048 
+                        }],"genre": "posts","keywords": "golang, 泛型","wordcount":  1366 ,
+        "url": "https:\/\/bychannel.github.io\/%E4%BD%BF%E7%94%A8%E5%85%B7%E5%90%8D%E8%BF%94%E5%9B%9E%E5%80%BC%E5%B7%A7%E5%A6%99%E8%A7%A3%E5%86%B3%E6%B3%9B%E5%9E%8B%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E9%9B%B6%E5%80%BC%E7%9A%84%E9%97%AE%E9%A2%98\/","datePublished": "2022-06-18T15:10:27+08:00","dateModified": "2022-06-18T15:10:27+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/bychannel.github.io\/images\/avatar.png",
+                    "width":  528 ,
+                    "height":  560 
+                }},"author": {
+                "@type": "Person",
+                "name": "池鱼"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="池鱼的编程随想">池鱼的编程随想</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="https://github.com/bychannel" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw' aria-hidden='true'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="池鱼的编程随想">池鱼的编程随想</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="https://github.com/bychannel" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw' aria-hidden='true'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">【转载】使用具名返回值巧妙解决泛型函数返回零值的问题</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>池鱼</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E7%BC%96%E7%A8%8B/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>编程</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-06-18">2022-06-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 1366 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
+            </div><div class="content" id="content"><blockquote>
+<p>注：本文转载自 <a href="https://tonybai.com/2022/05/20/solving-problems-in-generic-function-implementation-using-named-return-values/" target="_blank" rel="noopener noreffer ">https://tonybai.com/2022/05/20/solving-problems-in-generic-function-implementation-using-named-return-values/</a></p>
+<p>如有侵权，联系删除</p>
+</blockquote>
+<p>Go语言泛型语法特性在<a href="https://tonybai.com/2022/04/20/some-changes-in-go-1-18" target="_blank" rel="noopener noreffer ">Go 1.18版本</a>落地后，不出所料，在github上看到大量的基础容器类型数据结构被用泛型重写。这种重写我觉得是很正常、很自然的，并且实现良好的通用数据结构改为泛型其实也不难，有些简单的结构可能分分钟就能搞定。</p>
+<p>Go 1.18发布后，我一直没机会写泛型，今天在做<a href="https://tonybai.com/2022/05/10/introduction-of-implement-dsl-using-antlr-and-go" target="_blank" rel="noopener noreffer ">DSL</a>语义模型提取时，多处用到Stack结构，于是想到使用泛型简单实现了一个通用的Stack结构。</p>
+<p>在Go中，我们可以用一个切片来定义Stack。泛型Stack类型的定义如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">type Stack[T any] []T
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里的Stack类型就是一个带有类型参数(type parameter)的泛型类型，它的类型参数的约束(constraints)为<a href="https://tonybai.com/2021/12/18/replace-empty-interface-with-any-first-after-switching-to-go-1-18" target="_blank" rel="noopener noreffer ">any</a>，即允许任何类型作为Stack的元素类型。</p>
+<p>Stack是最基础的数据结构，一般来说它具有的操作方法包括：</p>
+<ul>
+<li>Push：压栈；</li>
+<li>Pop：弹栈；</li>
+<li>Top：获取栈顶元素；</li>
+<li>Len：获取栈内元素个数。</li>
+</ul>
+<p>对于以切片为底层存储的Stack而言，压栈Push操作就相当于对切片的追加(append)操作：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">func (s *Stack[T]) Push(v T) {
+</span></span><span class="line"><span class="cl">    (*s) = append((*s), v)
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>不过，这里有两点要注意：</p>
+<ul>
+<li>泛型类型的方法原型中，receiver部分的类型要带上类型参数，比如这里的*Stack[T]；</li>
+<li>这里务必要用*Stack[T]，而不要像下面代码这样用Stack[T]，否则append方法改变的仅仅是Stack[T]的拷贝，而不是原Stack[T]类型的实例。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">func (s Stack[T]) Push(v T) {
+</span></span><span class="line"><span class="cl">    s = append(s, v)
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>我们再来看看*Stack[T]的弹栈Pop方法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">func (s *Stack[T]) Pop() T {
+</span></span><span class="line"><span class="cl">    if len(*s) == 0 {
+</span></span><span class="line"><span class="cl">        return nil
+</span></span><span class="line"><span class="cl">    }     
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    // Get the last element from the stack.
+</span></span><span class="line"><span class="cl">    t := (*s)[len(*s)-1]
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    // Remove the last element from the stack.
+</span></span><span class="line"><span class="cl">    *s = (*s)[:len(*s)-1]
+</span></span><span class="line"><span class="cl">    return t
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这样实现的Pop方法会提示return nil一行有错误：<strong>cannot use nil as T value in return statement</strong>。Go编译器错误信息提示我们：<strong>nil不能作为T类型的值返回</strong>。</p>
+<p>Stack的类型参数的约束为any，即Stack的元素可以是任意类型，即可以是切片、map等复合类型，亦可以是int、string等值类型。如果将nil作为所有这些类型的零值的确不恰当。</p>
+<p>那么当Stack为空时，应该如何返回呢？多亏<a href="https://www.imooc.com/read/87/article/2381" target="_blank" rel="noopener noreffer ">Go原生支持类型零值</a>，我们可以声明一个类型零值并将其作为返回值返回：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">func (s *Stack[T]) Pop() T {
+</span></span><span class="line"><span class="cl">    if len(*s) == 0 {
+</span></span><span class="line"><span class="cl">        var zero T
+</span></span><span class="line"><span class="cl">        return zero // 模拟类型零值
+</span></span><span class="line"><span class="cl">    }     
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    // Get the last element from the stack.
+</span></span><span class="line"><span class="cl">    t := (*s)[len(*s)-1]
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    // Remove the last element from the stack.
+</span></span><span class="line"><span class="cl">    *s = (*s)[:len(*s)-1]
+</span></span><span class="line"><span class="cl">    return t
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>虽然这种方法有效，但你是不是和我有一样的感觉：<strong>不够优雅</strong>。下面我们就来看一个更为优雅的小技巧：<strong>利用函数的具名返回值</strong>，看代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">func (s *Stack[T]) Pop() (t T) {
+</span></span><span class="line"><span class="cl">    if len(*s) == 0 {
+</span></span><span class="line"><span class="cl">        return
+</span></span><span class="line"><span class="cl">    } 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    // Get the last element from the stack.
+</span></span><span class="line"><span class="cl">    t = (*s)[len(*s)-1]
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    // Remove the last element from the stack.
+</span></span><span class="line"><span class="cl">    *s = (*s)[:len(*s)-1]
+</span></span><span class="line"><span class="cl">    return
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>我们看到：具名返回值(named return value)一出马，一切都变得自然而然了。当然这也要归功于Go的类型零值特性。</p>
+<p>具名返回值日常使用的不多，从使用的频度来看，Go标准库以及多数项目的代码默认选择非具名返回值(unamed return value)。当函数使用defer且在deferred函数中修改外部函数返回值时，应用具名返回值可以让代码显得更清晰一些：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">func Foo() (a int) {
+</span></span><span class="line"><span class="cl">    defer func() {
+</span></span><span class="line"><span class="cl">        a = 5
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    a = 6
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>其他情况，看项目编码规范一致性要求以及个人喜好了。不过，Go引入泛型后，针对上述的泛型函数返回零值的情况，相信<strong>具名返回值</strong>将得到更多的“出镜”的机会。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2022-06-18</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/%E4%BD%BF%E7%94%A8%E5%85%B7%E5%90%8D%E8%BF%94%E5%9B%9E%E5%80%BC%E5%B7%A7%E5%A6%99%E8%A7%A3%E5%86%B3%E6%B3%9B%E5%9E%8B%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E9%9B%B6%E5%80%BC%E7%9A%84%E9%97%AE%E9%A2%98/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://bychannel.github.io/%E4%BD%BF%E7%94%A8%E5%85%B7%E5%90%8D%E8%BF%94%E5%9B%9E%E5%80%BC%E5%B7%A7%E5%A6%99%E8%A7%A3%E5%86%B3%E6%B3%9B%E5%9E%8B%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E9%9B%B6%E5%80%BC%E7%9A%84%E9%97%AE%E9%A2%98/" data-title="【转载】使用具名返回值巧妙解决泛型函数返回零值的问题" data-hashtags="golang,泛型"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://bychannel.github.io/%E4%BD%BF%E7%94%A8%E5%85%B7%E5%90%8D%E8%BF%94%E5%9B%9E%E5%80%BC%E5%B7%A7%E5%A6%99%E8%A7%A3%E5%86%B3%E6%B3%9B%E5%9E%8B%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E9%9B%B6%E5%80%BC%E7%9A%84%E9%97%AE%E9%A2%98/" data-hashtag="golang"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://bychannel.github.io/%E4%BD%BF%E7%94%A8%E5%85%B7%E5%90%8D%E8%BF%94%E5%9B%9E%E5%80%BC%E5%B7%A7%E5%A6%99%E8%A7%A3%E5%86%B3%E6%B3%9B%E5%9E%8B%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E9%9B%B6%E5%80%BC%E7%9A%84%E9%97%AE%E9%A2%98/" data-title="【转载】使用具名返回值巧妙解决泛型函数返回零值的问题"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://bychannel.github.io/%E4%BD%BF%E7%94%A8%E5%85%B7%E5%90%8D%E8%BF%94%E5%9B%9E%E5%80%BC%E5%B7%A7%E5%A6%99%E8%A7%A3%E5%86%B3%E6%B3%9B%E5%9E%8B%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E9%9B%B6%E5%80%BC%E7%9A%84%E9%97%AE%E9%A2%98/" data-title="【转载】使用具名返回值巧妙解决泛型函数返回零值的问题"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://bychannel.github.io/%E4%BD%BF%E7%94%A8%E5%85%B7%E5%90%8D%E8%BF%94%E5%9B%9E%E5%80%BC%E5%B7%A7%E5%A6%99%E8%A7%A3%E5%86%B3%E6%B3%9B%E5%9E%8B%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E9%9B%B6%E5%80%BC%E7%9A%84%E9%97%AE%E9%A2%98/" data-title="【转载】使用具名返回值巧妙解决泛型函数返回零值的问题"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/golang/">golang</a>,&nbsp;<a href="/tags/%E6%B3%9B%E5%9E%8B/">泛型</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/go%E7%9A%84nil%E7%94%A8%E6%B3%95/" class="prev" rel="prev" title="go的nil用法"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>go的nil用法</a>
+            <a href="/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B8%B8%E8%A7%81%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F%E5%92%8C%E9%98%B2%E5%BE%A1/" class="next" rel="next" title="【转载】服务器常见攻击方式和防御">【转载】服务器常见攻击方式和防御<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="utterances" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.119.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">池鱼</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/algoliasearch@4.13.1/dist/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"comment","lightTheme":"github-light","repo":"bychannel/bychannel.github.io"}},"search":{"algoliaAppID":"PASDMWALPK","algoliaIndex":"index.zh-cn","algoliaSearchKey":"b42948e51daaa93df92381c8e2ac0f93","highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"algolia"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

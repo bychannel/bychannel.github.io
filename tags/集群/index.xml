@@ -12,5 +12,13 @@
     <guid>https://bychannel.github.io/redis%E7%9A%84%E4%B8%89%E7%A7%8D%E9%9B%86%E7%BE%A4%E6%96%B9%E6%A1%88/</guid>
     <description><![CDATA[主从复制模式 主从复制的作用 通过持久化功能，Redis保证了即使在服务器重启的情况下也不会丢失（或少量丢失）数据，因为持久化会把内存中数据保存]]></description>
 </item>
+<item>
+    <title>浅析mongo的三种集群方案</title>
+    <link>https://bychannel.github.io/%E6%B5%85%E6%9E%90mongo%E7%9A%84%E4%B8%89%E7%A7%8D%E9%9B%86%E7%BE%A4%E6%96%B9%E6%A1%88/</link>
+    <pubDate>Sun, 09 Jan 2022 20:15:57 &#43;0800</pubDate>
+    <author>池鱼</author>
+    <guid>https://bychannel.github.io/%E6%B5%85%E6%9E%90mongo%E7%9A%84%E4%B8%89%E7%A7%8D%E9%9B%86%E7%BE%A4%E6%96%B9%E6%A1%88/</guid>
+    <description><![CDATA[MongoDb有三种部署方式：主从复制（Master-Slaver）、副本集（Replica Set）、分片（Sharding） Master-Slaver 是一种主从副]]></description>
+</item>
 </channel>
 </rss>

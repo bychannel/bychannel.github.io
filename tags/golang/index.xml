@@ -4,7 +4,15 @@
         <link>https://bychannel.github.io/tags/golang/</link>
         <description>golang - 标签 - 池鱼的编程随想</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1132431868@qq.com (池鱼)</managingEditor>
-            <webMaster>1132431868@qq.com (池鱼)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 07 Jun 2022 16:16:57 &#43;0800</lastBuildDate><atom:link href="https://bychannel.github.io/tags/golang/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>1132431868@qq.com (池鱼)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 18 Jun 2022 15:10:27 &#43;0800</lastBuildDate><atom:link href="https://bychannel.github.io/tags/golang/" rel="self" type="application/rss+xml" /><item>
+    <title>【转载】使用具名返回值巧妙解决泛型函数返回零值的问题</title>
+    <link>https://bychannel.github.io/%E4%BD%BF%E7%94%A8%E5%85%B7%E5%90%8D%E8%BF%94%E5%9B%9E%E5%80%BC%E5%B7%A7%E5%A6%99%E8%A7%A3%E5%86%B3%E6%B3%9B%E5%9E%8B%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E9%9B%B6%E5%80%BC%E7%9A%84%E9%97%AE%E9%A2%98/</link>
+    <pubDate>Sat, 18 Jun 2022 15:10:27 &#43;0800</pubDate>
+    <author>池鱼</author>
+    <guid>https://bychannel.github.io/%E4%BD%BF%E7%94%A8%E5%85%B7%E5%90%8D%E8%BF%94%E5%9B%9E%E5%80%BC%E5%B7%A7%E5%A6%99%E8%A7%A3%E5%86%B3%E6%B3%9B%E5%9E%8B%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E9%9B%B6%E5%80%BC%E7%9A%84%E9%97%AE%E9%A2%98/</guid>
+    <description><![CDATA[注：本文转载自 https://tonybai.com/2022/05/20/solving-problems-in-generic-function-implementation-using-named-return-values/ 如有侵权，联系删除 Go语言泛型语法特性在Go 1.18版本落地后，不出所料，在github上看到大量的基础容器类型数据结构被用]]></description>
+</item>
+<item>
     <title>go的nil用法</title>
     <link>https://bychannel.github.io/go%E7%9A%84nil%E7%94%A8%E6%B3%95/</link>
     <pubDate>Tue, 07 Jun 2022 16:16:57 &#43;0800</pubDate>

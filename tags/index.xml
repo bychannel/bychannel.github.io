@@ -31,9 +31,17 @@
 <item>
     <title>golang</title>
     <link>https://bychannel.github.io/tags/golang/</link>
-    <pubDate>Tue, 07 Jun 2022 16:16:57 &#43;0800</pubDate>
+    <pubDate>Sat, 18 Jun 2022 15:10:27 &#43;0800</pubDate>
     <author>池鱼</author>
     <guid>https://bychannel.github.io/tags/golang/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>泛型</title>
+    <link>https://bychannel.github.io/tags/%E6%B3%9B%E5%9E%8B/</link>
+    <pubDate>Sat, 18 Jun 2022 15:10:27 &#43;0800</pubDate>
+    <author>池鱼</author>
+    <guid>https://bychannel.github.io/tags/%E6%B3%9B%E5%9E%8B/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>
@@ -69,19 +77,11 @@
     <description><![CDATA[]]></description>
 </item>
 <item>
-    <title>git</title>
-    <link>https://bychannel.github.io/tags/git/</link>
-    <pubDate>Mon, 15 Nov 2021 16:26:57 &#43;0800</pubDate>
+    <title>mongo</title>
+    <link>https://bychannel.github.io/tags/mongo/</link>
+    <pubDate>Sun, 09 Jan 2022 20:15:57 &#43;0800</pubDate>
     <author>池鱼</author>
-    <guid>https://bychannel.github.io/tags/git/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>编译</title>
-    <link>https://bychannel.github.io/tags/%E7%BC%96%E8%AF%91/</link>
-    <pubDate>Sat, 12 Jun 2021 12:36:57 &#43;0800</pubDate>
-    <author>池鱼</author>
-    <guid>https://bychannel.github.io/tags/%E7%BC%96%E8%AF%91/</guid>
+    <guid>https://bychannel.github.io/tags/mongo/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>
