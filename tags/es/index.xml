@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>es - 标签 - 池鱼的编程随想</title>
+        <link>https://bychannel.github.io/tags/es/</link>
+        <description>es - 标签 - 池鱼的编程随想</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1132431868@qq.com (池鱼)</managingEditor>
+            <webMaster>1132431868@qq.com (池鱼)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 15 Jun 2020 12:16:50 &#43;0800</lastBuildDate><atom:link href="https://bychannel.github.io/tags/es/" rel="self" type="application/rss+xml" /><item>
+    <title>es删除索引</title>
+    <link>https://bychannel.github.io/es%E5%88%A0%E9%99%A4%E7%B4%A2%E5%BC%95/</link>
+    <pubDate>Mon, 15 Jun 2020 12:16:50 &#43;0800</pubDate>
+    <author>池鱼</author>
+    <guid>https://bychannel.github.io/es%E5%88%A0%E9%99%A4%E7%B4%A2%E5%BC%95/</guid>
+    <description><![CDATA[删除指定索引 1 2 3 # curl -XDELETE -u elastic:changeme http://localhost:9200/acc-apply-2018.08.09 {&#34;acknowledged&#34;:true} 删除多个指定索引 1 2 # 中间用逗号分隔 # curl -XDELETE -u elastic:changeme http://localhost:9200/acc-apply-2018.08.09,acc-apply-2018.08.10 模糊匹配删除 1 2 3 # curl -XDELETE -u elastic:changeme http://localhost:9200/acc-apply-* {&#34;acknowledged&#34;:true} 删除所有的索引 1 2 curl -XDELETE http://localhost:9200/_all 或 curl]]></description>
+</item>
+</channel>
+</rss>
