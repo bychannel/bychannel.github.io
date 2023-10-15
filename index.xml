@@ -4,9 +4,17 @@
         <link>https://bychannel.github.io/</link>
         <description>关注前沿技术发展，人生不止于编程</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1132431868@qq.com (池鱼)</managingEditor>
-            <webMaster>1132431868@qq.com (池鱼)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 13 Jul 2022 19:20:57 &#43;0800</lastBuildDate>
+            <webMaster>1132431868@qq.com (池鱼)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 10 Feb 2023 18:06:57 &#43;0800</lastBuildDate>
             <atom:link href="https://bychannel.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>【转载】定点数杂谈</title>
+    <link>https://bychannel.github.io/%E5%AE%9A%E7%82%B9%E6%95%B0%E6%9D%82%E8%B0%88/</link>
+    <pubDate>Fri, 10 Feb 2023 18:06:57 &#43;0800</pubDate>
+    <author>池鱼</author>
+    <guid>https://bychannel.github.io/%E5%AE%9A%E7%82%B9%E6%95%B0%E6%9D%82%E8%B0%88/</guid>
+    <description><![CDATA[注：本文转载自 定点数杂谈 - 掘金 如有侵权，联系删除 假如你开发了一个后台系统，其中有关于金额的一些操作。比如说，最小精度是分，也就是一分钱。 那么]]></description>
+</item>
+<item>
     <title>redis超时重试小结</title>
     <link>https://bychannel.github.io/redis%E8%B6%85%E6%97%B6%E9%87%8D%E8%AF%95%E5%B0%8F%E7%BB%93/</link>
     <pubDate>Wed, 13 Jul 2022 19:20:57 &#43;0800</pubDate>
@@ -77,14 +85,6 @@
     <author>池鱼</author>
     <guid>https://bychannel.github.io/%E7%94%9F%E6%88%90go%E5%8C%85uml%E7%B1%BB%E5%9B%BE/</guid>
     <description><![CDATA[GoLand内置的Diagrams功能不像IDEA一样强大，不支持生成类图。解决方案是利用github上的 PlantUML 类图生成器：jfeliu007/]]></description>
-</item>
-<item>
-    <title>浅析mongo的三种集群方案</title>
-    <link>https://bychannel.github.io/%E6%B5%85%E6%9E%90mongo%E7%9A%84%E4%B8%89%E7%A7%8D%E9%9B%86%E7%BE%A4%E6%96%B9%E6%A1%88/</link>
-    <pubDate>Sun, 09 Jan 2022 20:15:57 &#43;0800</pubDate>
-    <author>池鱼</author>
-    <guid>https://bychannel.github.io/%E6%B5%85%E6%9E%90mongo%E7%9A%84%E4%B8%89%E7%A7%8D%E9%9B%86%E7%BE%A4%E6%96%B9%E6%A1%88/</guid>
-    <description><![CDATA[MongoDb有三种部署方式：主从复制（Master-Slaver）、副本集（Replica Set）、分片（Sharding） Master-Slaver 是一种主从副]]></description>
 </item>
 </channel>
 </rss>

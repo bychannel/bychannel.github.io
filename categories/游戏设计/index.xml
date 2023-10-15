@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>游戏设计 - 分类 - 池鱼的编程随想</title>
+        <link>https://bychannel.github.io/categories/%E6%B8%B8%E6%88%8F%E8%AE%BE%E8%AE%A1/</link>
+        <description>游戏设计 - 分类 - 池鱼的编程随想</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1132431868@qq.com (池鱼)</managingEditor>
+            <webMaster>1132431868@qq.com (池鱼)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 10 Feb 2023 18:06:57 &#43;0800</lastBuildDate><atom:link href="https://bychannel.github.io/categories/%E6%B8%B8%E6%88%8F%E8%AE%BE%E8%AE%A1/" rel="self" type="application/rss+xml" /><item>
+    <title>【转载】定点数杂谈</title>
+    <link>https://bychannel.github.io/%E5%AE%9A%E7%82%B9%E6%95%B0%E6%9D%82%E8%B0%88/</link>
+    <pubDate>Fri, 10 Feb 2023 18:06:57 &#43;0800</pubDate>
+    <author>池鱼</author>
+    <guid>https://bychannel.github.io/%E5%AE%9A%E7%82%B9%E6%95%B0%E6%9D%82%E8%B0%88/</guid>
+    <description><![CDATA[注：本文转载自 定点数杂谈 - 掘金 如有侵权，联系删除 假如你开发了一个后台系统，其中有关于金额的一些操作。比如说，最小精度是分，也就是一分钱。 那么]]></description>
+</item>
+</channel>
+</rss>
