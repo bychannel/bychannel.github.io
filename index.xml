@@ -55,6 +55,14 @@
     <description><![CDATA[前言 golang是一门极具设计哲学的语言，其中一点是没有支持包循环导入，目的是迫使 Go 程序员更多地考虑程序的依赖关系。一方面保持依赖关系图的简]]></description>
 </item>
 <item>
+    <title>k8s部署go应用入门实践</title>
+    <link>https://bychannel.github.io/k8s%E9%83%A8%E7%BD%B2go%E5%BA%94%E7%94%A8%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/</link>
+    <pubDate>Sat, 12 Feb 2022 19:31:57 &#43;0800</pubDate>
+    <author>池鱼</author>
+    <guid>https://bychannel.github.io/k8s%E9%83%A8%E7%BD%B2go%E5%BA%94%E7%94%A8%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/</guid>
+    <description><![CDATA[k8s作为目前容器化管理和编排最热门的项目，我们无疑需要马上去学习它，而实践是能够帮助我们快速入门一项技术，在实践的过程中，我们可以理解大致]]></description>
+</item>
+<item>
     <title>如何生成go包的uml类图</title>
     <link>https://bychannel.github.io/%E7%94%9F%E6%88%90go%E5%8C%85uml%E7%B1%BB%E5%9B%BE/</link>
     <pubDate>Tue, 11 Jan 2022 11:26:57 &#43;0800</pubDate>
@@ -77,14 +85,6 @@
     <author>池鱼</author>
     <guid>https://bychannel.github.io/go%E7%A8%8B%E5%BA%8F%E7%BC%96%E8%AF%91%E4%BC%98%E5%8C%96/</guid>
     <description><![CDATA[gcflags go build 可以用 -gcflags 给 go 编译器传入参数，也就是传给 go tool compile 的参数，因此可以用 go tool compile --help 查看所有可用的参数。 常⽤参数 -m 开启内存分配分析(逃逸)。可以帮助]]></description>
-</item>
-<item>
-    <title>go的类型系统01</title>
-    <link>https://bychannel.github.io/go%E7%9A%84%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F01/</link>
-    <pubDate>Tue, 13 Apr 2021 13:16:57 &#43;0800</pubDate>
-    <author>池鱼</author>
-    <guid>https://bychannel.github.io/go%E7%9A%84%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F01/</guid>
-    <description><![CDATA[本文介绍 类型转换(Conversion)、类型断言(type assertion) 和类型切换（type switch)。 这三个概念类似但是又完全不同。 类型转换 Conversion 将]]></description>
 </item>
 </channel>
 </rss>
