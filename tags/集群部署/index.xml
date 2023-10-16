@@ -4,10 +4,10 @@
         <link>https://bychannel.github.io/tags/%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2/</link>
         <description>集群部署 - 标签 - 池鱼的编程随想</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1132431868@qq.com (池鱼)</managingEditor>
-            <webMaster>1132431868@qq.com (池鱼)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 12 Feb 2022 19:31:57 &#43;0800</lastBuildDate><atom:link href="https://bychannel.github.io/tags/%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>1132431868@qq.com (池鱼)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 12 Feb 2023 19:31:57 &#43;0800</lastBuildDate><atom:link href="https://bychannel.github.io/tags/%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2/" rel="self" type="application/rss+xml" /><item>
     <title>k8s部署go应用入门实践</title>
     <link>https://bychannel.github.io/k8s%E9%83%A8%E7%BD%B2go%E5%BA%94%E7%94%A8%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/</link>
-    <pubDate>Sat, 12 Feb 2022 19:31:57 &#43;0800</pubDate>
+    <pubDate>Sun, 12 Feb 2023 19:31:57 &#43;0800</pubDate>
     <author>池鱼</author>
     <guid>https://bychannel.github.io/k8s%E9%83%A8%E7%BD%B2go%E5%BA%94%E7%94%A8%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/</guid>
     <description><![CDATA[k8s作为目前容器化管理和编排最热门的项目，我们无疑需要马上去学习它，而实践是能够帮助我们快速入门一项技术，在实践的过程中，我们可以理解大致]]></description>

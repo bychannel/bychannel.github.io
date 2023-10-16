@@ -4,7 +4,23 @@
         <link>https://bychannel.github.io/categories/%E7%BC%96%E7%A8%8B/</link>
         <description>编程 - 分类 - 池鱼的编程随想</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1132431868@qq.com (池鱼)</managingEditor>
-            <webMaster>1132431868@qq.com (池鱼)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 13 Jul 2022 19:20:57 &#43;0800</lastBuildDate><atom:link href="https://bychannel.github.io/categories/%E7%BC%96%E7%A8%8B/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>1132431868@qq.com (池鱼)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 09 May 2023 20:15:57 &#43;0800</lastBuildDate><atom:link href="https://bychannel.github.io/categories/%E7%BC%96%E7%A8%8B/" rel="self" type="application/rss+xml" /><item>
+    <title>浅析mongo的三种集群方案</title>
+    <link>https://bychannel.github.io/%E6%B5%85%E6%9E%90mongo%E7%9A%84%E4%B8%89%E7%A7%8D%E9%9B%86%E7%BE%A4%E6%96%B9%E6%A1%88/</link>
+    <pubDate>Tue, 09 May 2023 20:15:57 &#43;0800</pubDate>
+    <author>池鱼</author>
+    <guid>https://bychannel.github.io/%E6%B5%85%E6%9E%90mongo%E7%9A%84%E4%B8%89%E7%A7%8D%E9%9B%86%E7%BE%A4%E6%96%B9%E6%A1%88/</guid>
+    <description><![CDATA[MongoDb有三种部署方式：主从复制（Master-Slaver）、副本集（Replica Set）、分片（Sharding） Master-Slaver 是一种主从副]]></description>
+</item>
+<item>
+    <title>redis的三种集群方案</title>
+    <link>https://bychannel.github.io/redis%E7%9A%84%E4%B8%89%E7%A7%8D%E9%9B%86%E7%BE%A4%E6%96%B9%E6%A1%88/</link>
+    <pubDate>Mon, 03 Apr 2023 17:10:57 &#43;0800</pubDate>
+    <author>池鱼</author>
+    <guid>https://bychannel.github.io/redis%E7%9A%84%E4%B8%89%E7%A7%8D%E9%9B%86%E7%BE%A4%E6%96%B9%E6%A1%88/</guid>
+    <description><![CDATA[主从复制模式 主从复制的作用 通过持久化功能，Redis保证了即使在服务器重启的情况下也不会丢失（或少量丢失）数据，因为持久化会把内存中数据保存]]></description>
+</item>
+<item>
     <title>redis超时重试小结</title>
     <link>https://bychannel.github.io/redis%E8%B6%85%E6%97%B6%E9%87%8D%E8%AF%95%E5%B0%8F%E7%BB%93/</link>
     <pubDate>Wed, 13 Jul 2022 19:20:57 &#43;0800</pubDate>
@@ -37,14 +53,6 @@
     <description><![CDATA[nil 是 Go 语言中经常使用的标识符，语义上代表了很多类型的零值。相信很多 Gopher 在实际使用中都或多或少踩过 nil 的坑，比如 interface 中 nil 的含义。这篇文章希望梳理一下]]></description>
 </item>
 <item>
-    <title>redis的三种集群方案</title>
-    <link>https://bychannel.github.io/redis%E7%9A%84%E4%B8%89%E7%A7%8D%E9%9B%86%E7%BE%A4%E6%96%B9%E6%A1%88/</link>
-    <pubDate>Tue, 03 May 2022 17:10:57 &#43;0800</pubDate>
-    <author>池鱼</author>
-    <guid>https://bychannel.github.io/redis%E7%9A%84%E4%B8%89%E7%A7%8D%E9%9B%86%E7%BE%A4%E6%96%B9%E6%A1%88/</guid>
-    <description><![CDATA[主从复制模式 主从复制的作用 通过持久化功能，Redis保证了即使在服务器重启的情况下也不会丢失（或少量丢失）数据，因为持久化会把内存中数据保存]]></description>
-</item>
-<item>
     <title>go的set实现方案</title>
     <link>https://bychannel.github.io/go%E7%9A%84set%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%A1%88/</link>
     <pubDate>Fri, 15 Apr 2022 16:36:57 &#43;0800</pubDate>
@@ -67,14 +75,6 @@
     <author>池鱼</author>
     <guid>https://bychannel.github.io/%E7%94%9F%E6%88%90go%E5%8C%85uml%E7%B1%BB%E5%9B%BE/</guid>
     <description><![CDATA[GoLand内置的Diagrams功能不像IDEA一样强大，不支持生成类图。解决方案是利用github上的 PlantUML 类图生成器：jfeliu007/]]></description>
-</item>
-<item>
-    <title>浅析mongo的三种集群方案</title>
-    <link>https://bychannel.github.io/%E6%B5%85%E6%9E%90mongo%E7%9A%84%E4%B8%89%E7%A7%8D%E9%9B%86%E7%BE%A4%E6%96%B9%E6%A1%88/</link>
-    <pubDate>Sun, 09 Jan 2022 20:15:57 &#43;0800</pubDate>
-    <author>池鱼</author>
-    <guid>https://bychannel.github.io/%E6%B5%85%E6%9E%90mongo%E7%9A%84%E4%B8%89%E7%A7%8D%E9%9B%86%E7%BE%A4%E6%96%B9%E6%A1%88/</guid>
-    <description><![CDATA[MongoDb有三种部署方式：主从复制（Master-Slaver）、副本集（Replica Set）、分片（Sharding） Master-Slaver 是一种主从副]]></description>
 </item>
 <item>
     <title>go程序编译优化</title>

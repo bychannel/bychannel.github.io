@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Linux - 分类 - 池鱼的编程随想</title>
+        <link>https://bychannel.github.io/categories/linux/</link>
+        <description>Linux - 分类 - 池鱼的编程随想</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1132431868@qq.com (池鱼)</managingEditor>
+            <webMaster>1132431868@qq.com (池鱼)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 02 Sep 2022 19:02:57 &#43;0800</lastBuildDate><atom:link href="https://bychannel.github.io/categories/linux/" rel="self" type="application/rss+xml" /><item>
+    <title>top命令详解</title>
+    <link>https://bychannel.github.io/top%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/</link>
+    <pubDate>Fri, 02 Sep 2022 19:02:57 &#43;0800</pubDate>
+    <author>池鱼</author>
+    <guid>https://bychannel.github.io/top%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/</guid>
+    <description><![CDATA[top命令是Linux下常用的性能分析工具，能够实时显示系统中各个进程的资源占用状况，类似于Windows的任务管理器。 top显示系统当前的]]></description>
+</item>
+</channel>
+</rss>
