@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Containerd配置镜像加速 - 池鱼的编程随想</title><meta name="Description" content="关注前沿技术发展，人生不止于编程"><meta property="og:title" content="Containerd配置镜像加速" />
+<meta property="og:description" content="众所周知，长城防火墙的存在使的k8s镜像加载变得异常困难，不使用特殊手段几乎是无法正常拉取到镜像，k8s1.24以后的默认容器运行时是con" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://bychannel.github.io/containerd%E9%85%8D%E7%BD%AE%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F/" /><meta property="og:image" content="https://bychannel.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-07-10T13:31:27+08:00" />
+<meta property="article:modified_time" content="2023-07-10T13:31:27+08:00" /><meta property="og:site_name" content="池鱼的编程随想" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://bychannel.github.io/logo.png"/>
+
+<meta name="twitter:title" content="Containerd配置镜像加速"/>
+<meta name="twitter:description" content="众所周知，长城防火墙的存在使的k8s镜像加载变得异常困难，不使用特殊手段几乎是无法正常拉取到镜像，k8s1.24以后的默认容器运行时是con"/>
+<meta name="application-name" content="池鱼的编程随想">
+<meta name="apple-mobile-web-app-title" content="池鱼的编程随想"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://bychannel.github.io/containerd%E9%85%8D%E7%BD%AE%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F/" /><link rel="prev" href="https://bychannel.github.io/%E6%B5%85%E6%9E%90mongo%E7%9A%84%E4%B8%89%E7%A7%8D%E9%9B%86%E7%BE%A4%E6%96%B9%E6%A1%88/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Containerd配置镜像加速",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/bychannel.github.io\/containerd%E9%85%8D%E7%BD%AE%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/bychannel.github.io\/images\/Apple-Devices-Preview.png",
+                            "width":  3200 ,
+                            "height":  2048 
+                        }],"genre": "posts","keywords": "k8s, 镜像加速","wordcount":  1453 ,
+        "url": "https:\/\/bychannel.github.io\/containerd%E9%85%8D%E7%BD%AE%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F\/","datePublished": "2023-07-10T13:31:27+08:00","dateModified": "2023-07-10T13:31:27+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/bychannel.github.io\/images\/avatar.png",
+                    "width":  528 ,
+                    "height":  560 
+                }},"author": {
+                "@type": "Person",
+                "name": "池鱼"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="池鱼的编程随想">池鱼的编程随想</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="https://github.com/bychannel" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw' aria-hidden='true'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="池鱼的编程随想">池鱼的编程随想</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="https://github.com/bychannel" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw' aria-hidden='true'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Containerd配置镜像加速</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>池鱼</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/kubernetes/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>kubernetes</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-07-10">2023-07-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 1453 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#旧版本配置方法">旧版本配置方法</a>
+      <ul>
+        <li><a href="#1-生成containerd配置文件">1. 生成containerd配置文件</a></li>
+        <li><a href="#2-修改配置文件">2. 修改配置文件</a></li>
+      </ul>
+    </li>
+    <li><a href="#新版本配置方法">新版本配置方法</a>
+      <ul>
+        <li><a href="#1-修改configtoml">1. 修改config.toml</a></li>
+        <li><a href="#2-配置镜像加速">2. 配置镜像加速</a></li>
+        <li><a href="#3-重启containerd">3. 重启containerd</a></li>
+        <li><a href="#4-验证">4. 验证</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>众所周知，长城防火墙的存在使的k8s镜像加载变得异常困难，不使用特殊手段几乎是无法正常拉取到镜像，k8s1.24以后的默认容器运行时是containerd，也就是说k8s会直接使用containerd去拉取镜像，并启动容器，而不再是使用docker去拉取镜像，所以我们需要配置containerd的镜像加速器。
+下面记录一下相关的配置方法：</p>
+<h2 id="旧版本配置方法">旧版本配置方法</h2>
+<p>在containerd1.5版本前，配置方法如下：</p>
+<h3 id="1-生成containerd配置文件">1. 生成containerd配置文件</h3>
+<p>如果配置文件不存在，则执行下面这条命令，否则跳过</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">containerd config default &gt; /etc/containerd/config.toml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="2-修改配置文件">2. 修改配置文件</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">vim /etc/containerd/config.toml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>需要找到这一行，并添加2行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[plugins.&#34;io.containerd.grpc.v1.cri&#34;.registry.mirrors]
+</span></span><span class="line"><span class="cl">  [plugins.&#34;io.containerd.grpc.v1.cri&#34;.registry.mirrors.&#34;docker.io&#34;]
+</span></span><span class="line"><span class="cl">    endpoint = [&#34;镜像加速器地址1&#34;,&#34;镜像加速器地址2&#34;]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>写完之后重启containerd就可以了</p>
+<h2 id="新版本配置方法">新版本配置方法</h2>
+<p>新版本的containerd镜像仓库配置都是建议放在一个单独的文件夹当中，并且在/etc/containerd/config.toml配置文件当中打开config_path配置，指向镜像仓库配置目录即可。这种方式只需要在第一次修改/etc/containerd/config.toml文件打开config_path配置时需要重启containerd，后续我们增加镜像仓库配置都无需重启containerd，非常方便。</p>
+<p>官方文档：<a href="https://github.com/containerd/containerd/blob/v1.6.24/docs/cri/registry.md" target="_blank" rel="noopener noreffer ">https://github.com/containerd/containerd/blob/v1.6.24/docs/cri/registry.md</a></p>
+<h3 id="1-修改configtoml">1. 修改config.toml</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@master1 ~]# vim /etc/containerd/config.toml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 修改内容
+</span></span><span class="line"><span class="cl">[plugins.&#34;io.containerd.grpc.v1.cri&#34;.registry]
+</span></span><span class="line"><span class="cl">   config_path = &#34;/etc/containerd/certs.d&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="2-配置镜像加速">2. 配置镜像加速</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># docker hub镜像加速
+</span></span><span class="line"><span class="cl">mkdir -p /etc/containerd/certs.d/docker.io
+</span></span><span class="line"><span class="cl">cat &gt; /etc/containerd/certs.d/docker.io/hosts.toml &lt;&lt; EOF
+</span></span><span class="line"><span class="cl">server = &#34;https://docker.io&#34;
+</span></span><span class="line"><span class="cl">[host.&#34;https://dockerproxy.com&#34;]
+</span></span><span class="line"><span class="cl">  capabilities = [&#34;pull&#34;, &#34;resolve&#34;]
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">[host.&#34;https://docker.m.daocloud.io&#34;]
+</span></span><span class="line"><span class="cl">  capabilities = [&#34;pull&#34;, &#34;resolve&#34;]
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">[host.&#34;https://reg-mirror.qiniu.com&#34;]
+</span></span><span class="line"><span class="cl">  capabilities = [&#34;pull&#34;, &#34;resolve&#34;]
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">[host.&#34;https://registry.docker-cn.com&#34;]
+</span></span><span class="line"><span class="cl">  capabilities = [&#34;pull&#34;, &#34;resolve&#34;]
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">[host.&#34;http://hub-mirror.c.163.com&#34;]
+</span></span><span class="line"><span class="cl">  capabilities = [&#34;pull&#34;, &#34;resolve&#34;]
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">EOF
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># registry.k8s.io镜像加速
+</span></span><span class="line"><span class="cl">mkdir -p /etc/containerd/certs.d/registry.k8s.io
+</span></span><span class="line"><span class="cl">tee /etc/containerd/certs.d/registry.k8s.io/hosts.toml &lt;&lt; &#39;EOF&#39;
+</span></span><span class="line"><span class="cl">server = &#34;https://registry.k8s.io&#34;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">[host.&#34;https://k8s.m.daocloud.io&#34;]
+</span></span><span class="line"><span class="cl">  capabilities = [&#34;pull&#34;, &#34;resolve&#34;, &#34;push&#34;]
+</span></span><span class="line"><span class="cl">EOF
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># docker.elastic.co镜像加速
+</span></span><span class="line"><span class="cl">mkdir -p /etc/containerd/certs.d/docker.elastic.co
+</span></span><span class="line"><span class="cl">tee /etc/containerd/certs.d/docker.elastic.co/hosts.toml &lt;&lt; &#39;EOF&#39;
+</span></span><span class="line"><span class="cl">server = &#34;https://docker.elastic.co&#34;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">[host.&#34;https://elastic.m.daocloud.io&#34;]
+</span></span><span class="line"><span class="cl">  capabilities = [&#34;pull&#34;, &#34;resolve&#34;, &#34;push&#34;]
+</span></span><span class="line"><span class="cl">EOF
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># gcr.io镜像加速
+</span></span><span class="line"><span class="cl">mkdir -p /etc/containerd/certs.d/gcr.io
+</span></span><span class="line"><span class="cl">tee /etc/containerd/certs.d/gcr.io/hosts.toml &lt;&lt; &#39;EOF&#39;
+</span></span><span class="line"><span class="cl">server = &#34;https://gcr.io&#34;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">[host.&#34;https://gcr.m.daocloud.io&#34;]
+</span></span><span class="line"><span class="cl">  capabilities = [&#34;pull&#34;, &#34;resolve&#34;, &#34;push&#34;]
+</span></span><span class="line"><span class="cl">EOF
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># ghcr.io镜像加速
+</span></span><span class="line"><span class="cl">mkdir -p /etc/containerd/certs.d/ghcr.io
+</span></span><span class="line"><span class="cl">tee /etc/containerd/certs.d/ghcr.io/hosts.toml &lt;&lt; &#39;EOF&#39;
+</span></span><span class="line"><span class="cl">server = &#34;https://ghcr.io&#34;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">[host.&#34;https://ghcr.m.daocloud.io&#34;]
+</span></span><span class="line"><span class="cl">  capabilities = [&#34;pull&#34;, &#34;resolve&#34;, &#34;push&#34;]
+</span></span><span class="line"><span class="cl">EOF
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># k8s.gcr.io镜像加速
+</span></span><span class="line"><span class="cl">mkdir -p /etc/containerd/certs.d/k8s.gcr.io
+</span></span><span class="line"><span class="cl">tee /etc/containerd/certs.d/k8s.gcr.io/hosts.toml &lt;&lt; &#39;EOF&#39;
+</span></span><span class="line"><span class="cl">server = &#34;https://k8s.gcr.io&#34;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">[host.&#34;https://k8s-gcr.m.daocloud.io&#34;]
+</span></span><span class="line"><span class="cl">  capabilities = [&#34;pull&#34;, &#34;resolve&#34;, &#34;push&#34;]
+</span></span><span class="line"><span class="cl">EOF
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># mcr.microsoft.com镜像加速
+</span></span><span class="line"><span class="cl">mkdir -p /etc/containerd/certs.d/mcr.microsoft.com
+</span></span><span class="line"><span class="cl">tee /etc/containerd/certs.d/mcr.microsoft.com/hosts.toml &lt;&lt; &#39;EOF&#39;
+</span></span><span class="line"><span class="cl">server = &#34;https://mcr.microsoft.com&#34;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">[host.&#34;https://mcr.m.daocloud.io&#34;]
+</span></span><span class="line"><span class="cl">  capabilities = [&#34;pull&#34;, &#34;resolve&#34;, &#34;push&#34;]
+</span></span><span class="line"><span class="cl">EOF
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># nvcr.io镜像加速
+</span></span><span class="line"><span class="cl">mkdir -p /etc/containerd/certs.d/nvcr.io
+</span></span><span class="line"><span class="cl">tee /etc/containerd/certs.d/nvcr.io/hosts.toml &lt;&lt; &#39;EOF&#39;
+</span></span><span class="line"><span class="cl">server = &#34;https://nvcr.io&#34;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">[host.&#34;https://nvcr.m.daocloud.io&#34;]
+</span></span><span class="line"><span class="cl">  capabilities = [&#34;pull&#34;, &#34;resolve&#34;, &#34;push&#34;]
+</span></span><span class="line"><span class="cl">EOF
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># quay.io镜像加速
+</span></span><span class="line"><span class="cl">mkdir -p /etc/containerd/certs.d/quay.io
+</span></span><span class="line"><span class="cl">tee /etc/containerd/certs.d/quay.io/hosts.toml &lt;&lt; &#39;EOF&#39;
+</span></span><span class="line"><span class="cl">server = &#34;https://quay.io&#34;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">[host.&#34;https://quay.m.daocloud.io&#34;]
+</span></span><span class="line"><span class="cl">  capabilities = [&#34;pull&#34;, &#34;resolve&#34;, &#34;push&#34;]
+</span></span><span class="line"><span class="cl">EOF
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># registry.jujucharms.com镜像加速
+</span></span><span class="line"><span class="cl">mkdir -p /etc/containerd/certs.d/registry.jujucharms.com
+</span></span><span class="line"><span class="cl">tee /etc/containerd/certs.d/registry.jujucharms.com/hosts.toml &lt;&lt; &#39;EOF&#39;
+</span></span><span class="line"><span class="cl">server = &#34;https://registry.jujucharms.com&#34;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">[host.&#34;https://jujucharms.m.daocloud.io&#34;]
+</span></span><span class="line"><span class="cl">  capabilities = [&#34;pull&#34;, &#34;resolve&#34;, &#34;push&#34;]
+</span></span><span class="line"><span class="cl">EOF
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># rocks.canonical.com镜像加速
+</span></span><span class="line"><span class="cl">mkdir -p /etc/containerd/certs.d/rocks.canonical.com
+</span></span><span class="line"><span class="cl">tee /etc/containerd/certs.d/rocks.canonical.com/hosts.toml &lt;&lt; &#39;EOF&#39;
+</span></span><span class="line"><span class="cl">server = &#34;https://rocks.canonical.com&#34;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">[host.&#34;https://rocks-canonical.m.daocloud.io&#34;]
+</span></span><span class="line"><span class="cl">  capabilities = [&#34;pull&#34;, &#34;resolve&#34;, &#34;push&#34;]
+</span></span><span class="line"><span class="cl">EOF
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="3-重启containerd">3. 重启containerd</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@master1 ~]# systemctl restart containerd
+</span></span><span class="line"><span class="cl">[root@master1 ~]# systemctl status containerd
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="4-验证">4. 验证</h3>
+<p>crictl 命令， 会自动使用/etc/containerd/certs.d目录下的配置镜像加速 （推荐）
+使用crictl 命令拉取</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@node2 certs.d]# crictl --debug=true  pull docker.io/library/ubuntu:20.04
+</span></span><span class="line"><span class="cl">DEBU[0000] get image connection
+</span></span><span class="line"><span class="cl">DEBU[0000] PullImageRequest: &amp;PullImageRequest{Image:&amp;ImageSpec{Image:docker.io/library/ubuntu:20.04,Annotations:map[string]string{},UserSpecifiedImage:,RuntimeHandler:,},Auth:nil,SandboxConfig:nil,}
+</span></span><span class="line"><span class="cl">DEBU[0022] PullImageResponse: &amp;PullImageResponse{ImageRef:sha256:ba6acccedd2923aee4c2acc6a23780b14ed4b8a5fa4e14e252a23b846df9b6c1,}
+</span></span><span class="line"><span class="cl">Image is up to date for sha256:ba6acccedd2923aee4c2acc6a23780b14ed4b8a5fa4e14e252a23b846df9b6c1
+</span></span><span class="line"><span class="cl">[root@node2 certs.d]# crictl images
+</span></span><span class="line"><span class="cl">IMAGE                                        TAG                    IMAGE ID            SIZE
+</span></span><span class="line"><span class="cl">docker.io/library/ubuntu                     20.04                  ba6acccedd292       28.6MB
+</span></span><span class="line"><span class="cl">docker.io/rancher/klipper-helm               v0.8.3-build20240228   0929b4140ada6       256MB
+</span></span><span class="line"><span class="cl">docker.io/rancher/klipper-lb                 v0.4.7                 edc812b8e25d0       12.2MB
+</span></span><span class="line"><span class="cl">docker.io/rancher/local-path-provisioner     v0.0.26                c54dcef6214cb       48.7MB
+</span></span><span class="line"><span class="cl">docker.io/rancher/mirrored-coredns-coredns   1.10.1                 ead0a4a53df89       53.6MB
+</span></span><span class="line"><span class="cl">docker.io/rancher/mirrored-library-busybox   1.36.1                 65ad0d468eb1c       4.5MB
+</span></span><span class="line"><span class="cl">docker.io/rancher/mirrored-library-traefik   2.10.7                 ee69e8120b64a       154MB
+</span></span><span class="line"><span class="cl">docker.io/rancher/mirrored-metrics-server    v0.7.0                 b9a5a1927366a       68.2MB
+</span></span><span class="line"><span class="cl">docker.io/rancher/mirrored-pause             3.6                    6270bb605e12e       686kB
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>是对于ctr命令，需要指定&ndash;hosts-dir=/etc/containerd/certs.d，举个栗子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ctr i pull --hosts-dir=/etc/containerd/certs.d registry.k8s.io/sig-storage/csi-provisioner:v3.5.0
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果要确定此命令是否真的使用了镜像加速，可以增加&ndash;debug=true参数，譬如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ctr --debug=true i pull --hosts-dir=/etc/containerd/certs.d registry.k8s.io/sig-storage/csi-provisioner:v3.5.0
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2023-07-10</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/containerd%E9%85%8D%E7%BD%AE%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://bychannel.github.io/containerd%E9%85%8D%E7%BD%AE%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F/" data-title="Containerd配置镜像加速" data-hashtags="k8s,镜像加速"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://bychannel.github.io/containerd%E9%85%8D%E7%BD%AE%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F/" data-hashtag="k8s"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://bychannel.github.io/containerd%E9%85%8D%E7%BD%AE%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F/" data-title="Containerd配置镜像加速"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://bychannel.github.io/containerd%E9%85%8D%E7%BD%AE%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F/" data-title="Containerd配置镜像加速"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://bychannel.github.io/containerd%E9%85%8D%E7%BD%AE%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F/" data-title="Containerd配置镜像加速"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/k8s/">k8s</a>,&nbsp;<a href="/tags/%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F/">镜像加速</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/%E6%B5%85%E6%9E%90mongo%E7%9A%84%E4%B8%89%E7%A7%8D%E9%9B%86%E7%BE%A4%E6%96%B9%E6%A1%88/" class="prev" rel="prev" title="浅析mongo的三种集群方案"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>浅析mongo的三种集群方案</a></div>
+</div>
+<div id="comments"><div id="utterances" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.110.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">池鱼</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/algoliasearch@4.13.1/dist/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"comment","lightTheme":"github-light","repo":"bychannel/bychannel.github.io"}},"search":{"algoliaAppID":"PASDMWALPK","algoliaIndex":"index.zh-cn","algoliaSearchKey":"b42948e51daaa93df92381c8e2ac0f93","highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"algolia"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

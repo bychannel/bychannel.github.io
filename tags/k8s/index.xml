@@ -4,7 +4,15 @@
         <link>https://bychannel.github.io/tags/k8s/</link>
         <description>k8s - 标签 - 池鱼的编程随想</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1132431868@qq.com (池鱼)</managingEditor>
-            <webMaster>1132431868@qq.com (池鱼)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 12 Feb 2023 19:31:57 &#43;0800</lastBuildDate><atom:link href="https://bychannel.github.io/tags/k8s/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>1132431868@qq.com (池鱼)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 10 Jul 2023 13:31:27 &#43;0800</lastBuildDate><atom:link href="https://bychannel.github.io/tags/k8s/" rel="self" type="application/rss+xml" /><item>
+    <title>Containerd配置镜像加速</title>
+    <link>https://bychannel.github.io/containerd%E9%85%8D%E7%BD%AE%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F/</link>
+    <pubDate>Mon, 10 Jul 2023 13:31:27 &#43;0800</pubDate>
+    <author>池鱼</author>
+    <guid>https://bychannel.github.io/containerd%E9%85%8D%E7%BD%AE%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F/</guid>
+    <description><![CDATA[众所周知，长城防火墙的存在使的k8s镜像加载变得异常困难，不使用特殊手段几乎是无法正常拉取到镜像，k8s1.24以后的默认容器运行时是con]]></description>
+</item>
+<item>
     <title>k8s部署go应用入门实践</title>
     <link>https://bychannel.github.io/k8s%E9%83%A8%E7%BD%B2go%E5%BA%94%E7%94%A8%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/</link>
     <pubDate>Sun, 12 Feb 2023 19:31:57 &#43;0800</pubDate>

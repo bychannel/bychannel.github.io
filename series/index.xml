@@ -1,8 +1,0 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
-    <channel>
-        <title>Series - series - 池鱼的编程随想</title>
-        <link>https://bychannel.github.io/series/</link>
-        <description>Series - series - 池鱼的编程随想</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1132431868@qq.com (池鱼)</managingEditor>
-            <webMaster>1132431868@qq.com (池鱼)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><atom:link href="https://bychannel.github.io/series/" rel="self" type="application/rss+xml" /></channel>
-</rss>

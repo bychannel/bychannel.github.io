@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>镜像加速 - 标签 - 池鱼的编程随想</title>
+        <link>https://bychannel.github.io/tags/%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F/</link>
+        <description>镜像加速 - 标签 - 池鱼的编程随想</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1132431868@qq.com (池鱼)</managingEditor>
+            <webMaster>1132431868@qq.com (池鱼)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 10 Jul 2023 13:31:27 &#43;0800</lastBuildDate><atom:link href="https://bychannel.github.io/tags/%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F/" rel="self" type="application/rss+xml" /><item>
+    <title>Containerd配置镜像加速</title>
+    <link>https://bychannel.github.io/containerd%E9%85%8D%E7%BD%AE%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F/</link>
+    <pubDate>Mon, 10 Jul 2023 13:31:27 &#43;0800</pubDate>
+    <author>池鱼</author>
+    <guid>https://bychannel.github.io/containerd%E9%85%8D%E7%BD%AE%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F/</guid>
+    <description><![CDATA[众所周知，长城防火墙的存在使的k8s镜像加载变得异常困难，不使用特殊手段几乎是无法正常拉取到镜像，k8s1.24以后的默认容器运行时是con]]></description>
+</item>
+</channel>
+</rss>

@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
     <head>
-	<meta name="generator" content="Hugo 0.121.1">
+	<meta name="generator" content="Hugo 0.110.0">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title>池鱼的编程随想</title><meta name="Description" content="关注前沿技术发展，人生不止于编程"><meta property="og:title" content="池鱼的编程随想" />
 <meta property="og:description" content="关注前沿技术发展，人生不止于编程" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://bychannel.github.io/" /><meta property="og:image" content="https://bychannel.github.io/logo.png" /><meta property="og:site_name" content="池鱼的编程随想" />
+<meta property="og:url" content="https://bychannel.github.io/" /><meta property="og:image" content="https://bychannel.github.io/logo.png"/><meta property="og:site_name" content="池鱼的编程随想" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://bychannel.github.io/logo.png"/>
 
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://bychannel.github.io/logo.png" /><meta name="twitter:title" content="池鱼的编程随想"/>
+<meta name="twitter:title" content="池鱼的编程随想"/>
 <meta name="twitter:description" content="关注前沿技术发展，人生不止于编程"/>
 <meta name="application-name" content="池鱼的编程随想">
 <meta name="apple-mobile-web-app-title" content="池鱼的编程随想"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
@@ -103,6 +104,11 @@
         alt="/images/avatar.png"
         title="/images/avatar.png" width="528" height="560" /></a></div><h1 class="home-title">池鱼的编程随想</h1><div class="home-subtitle"><div id="id-1" class="typeit"></div></div><div class="links"><a href="https://github.com/bychannel" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github fa-fw" aria-hidden="true"></i></a><a href="mailto:1132431868@qq.com" title="Email" rel="me"><i class="far fa-envelope fa-fw" aria-hidden="true"></i></a><a href="/index.xml" title="RSS" target="_blank" rel="noopener noreffer me"><i class="fas fa-rss fa-fw" aria-hidden="true"></i></a></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/containerd%E9%85%8D%E7%BD%AE%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F/">Containerd配置镜像加速</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>池鱼</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2023-07-10">2023-07-10</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/kubernetes/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>kubernetes</a></span></div><div class="content">众所周知，长城防火墙的存在使的k8s镜像加载变得异常困难，不使用特殊手段几乎是无法正常拉取到镜像，k8s1.24以后的默认容器运行时是con</div><div class="post-footer">
+        <a href="/containerd%E9%85%8D%E7%BD%AE%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/k8s/">k8s</a>,&nbsp;<a href="/tags/%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F/">镜像加速</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/%E6%B5%85%E6%9E%90mongo%E7%9A%84%E4%B8%89%E7%A7%8D%E9%9B%86%E7%BE%A4%E6%96%B9%E6%A1%88/">浅析mongo的三种集群方案</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>池鱼</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2023-05-09">2023-05-09</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E7%BC%96%E7%A8%8B/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>编程</a></span></div><div class="content">MongoDb有三种部署方式：主从复制（Master-Slaver）、副本集（Replica Set）、分片（Sharding） Master-Slaver 是一种主从副</div><div class="post-footer">
         <a href="/%E6%B5%85%E6%9E%90mongo%E7%9A%84%E4%B8%89%E7%A7%8D%E9%9B%86%E7%BE%A4%E6%96%B9%E6%A1%88/">阅读全文</a><div class="post-tags">
@@ -127,11 +133,6 @@
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>池鱼</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2022-09-02">2022-09-02</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/linux/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Linux</a></span></div><div class="content">top命令是Linux下常用的性能分析工具，能够实时显示系统中各个进程的资源占用状况，类似于Windows的任务管理器。 top显示系统当前的</div><div class="post-footer">
         <a href="/top%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/">阅读全文</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/linux/">linux</a>,&nbsp;<a href="/tags/%E5%91%BD%E4%BB%A4/">命令</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/redis%E8%B6%85%E6%97%B6%E9%87%8D%E8%AF%95%E5%B0%8F%E7%BB%93/">redis超时重试小结</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>池鱼</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2022-07-13">2022-07-13</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E7%BC%96%E7%A8%8B/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>编程</a></span></div><div class="content">在互联网服务中，特别是在云环境下，网络及硬件环境复杂，所有应用程序都可能遇到暂时性故障。暂时性故障包括瞬时的网络抖动，服务暂时不可用，服务繁</div><div class="post-footer">
-        <a href="/redis%E8%B6%85%E6%97%B6%E9%87%8D%E8%AF%95%E5%B0%8F%E7%BB%93/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/redis/">redis</a></div></div>
 </article><ul class="pagination"><li class="page-item active">
                     <span class="page-link">
                         <a href="/">1</a>
@@ -150,8 +151,8 @@
                     </span>
                 </li></ul></div></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.121.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
-                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">池鱼</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.110.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">池鱼</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>
 
