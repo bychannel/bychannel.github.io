@@ -25,7 +25,7 @@ kubectl create -f https://k8s.io/examples/application/deployment.yaml
 
 在终端输入k9s，进入Context的界面。
 
-<img src="/images/k9s1.png">
+![](/images/k9s1.png)
 
 通过方向键↑↓或者使用Vim的jk来选择部署的集群，ENTER进入集群。
 
