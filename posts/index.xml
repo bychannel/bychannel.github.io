@@ -45,6 +45,14 @@
     <description><![CDATA[注：本文转载自 定点数杂谈 - 掘金 如有侵权，联系删除 假如你开发了一个后台系统，其中有关于金额的一些操作。比如说，最小精度是分，也就是一分钱。 那么]]></description>
 </item>
 <item>
+    <title>k9s入门教程</title>
+    <link>https://bychannel.github.io/k9s%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/</link>
+    <pubDate>Mon, 16 Jan 2023 10:30:57 &#43;0800</pubDate>
+    <author>池鱼</author>
+    <guid>https://bychannel.github.io/k9s%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/</guid>
+    <description><![CDATA[K9s是一个基于终端的K8s UI管理工具。只需要一个二进制文件，就可以在任意的命令行终端上对K8s进行管理。这个工具的操作逻辑是基于Vim，]]></description>
+</item>
+<item>
     <title>top命令详解</title>
     <link>https://bychannel.github.io/top%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/</link>
     <pubDate>Fri, 02 Sep 2022 19:02:57 &#43;0800</pubDate>
@@ -75,14 +83,6 @@
     <author>池鱼</author>
     <guid>https://bychannel.github.io/%E4%BD%BF%E7%94%A8%E5%85%B7%E5%90%8D%E8%BF%94%E5%9B%9E%E5%80%BC%E5%B7%A7%E5%A6%99%E8%A7%A3%E5%86%B3%E6%B3%9B%E5%9E%8B%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E9%9B%B6%E5%80%BC%E7%9A%84%E9%97%AE%E9%A2%98/</guid>
     <description><![CDATA[注：本文转载自 https://tonybai.com/2022/05/20/solving-problems-in-generic-function-implementation-using-named-return-values/ 如有侵权，联系删除 Go语言泛型语法特性在Go 1.18版本落地后，不出所料，在github上看到大量的基础容器类型数据结构被用]]></description>
-</item>
-<item>
-    <title>go的nil用法</title>
-    <link>https://bychannel.github.io/go%E7%9A%84nil%E7%94%A8%E6%B3%95/</link>
-    <pubDate>Tue, 07 Jun 2022 16:16:57 &#43;0800</pubDate>
-    <author>池鱼</author>
-    <guid>https://bychannel.github.io/go%E7%9A%84nil%E7%94%A8%E6%B3%95/</guid>
-    <description><![CDATA[nil 是 Go 语言中经常使用的标识符，语义上代表了很多类型的零值。相信很多 Gopher 在实际使用中都或多或少踩过 nil 的坑，比如 interface 中 nil 的含义。这篇文章希望梳理一下]]></description>
 </item>
 </channel>
 </rss>

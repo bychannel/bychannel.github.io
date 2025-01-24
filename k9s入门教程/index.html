@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>k9s入门教程 - 池鱼的编程随想</title><meta name="Description" content="关注前沿技术发展，人生不止于编程"><meta property="og:title" content="k9s入门教程" />
+<meta property="og:description" content="K9s是一个基于终端的K8s UI管理工具。只需要一个二进制文件，就可以在任意的命令行终端上对K8s进行管理。这个工具的操作逻辑是基于Vim，" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://bychannel.github.io/k9s%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/" /><meta property="og:image" content="https://bychannel.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-01-16T10:30:57+08:00" />
+<meta property="article:modified_time" content="2023-01-16T10:30:57+08:00" /><meta property="og:site_name" content="池鱼的编程随想" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://bychannel.github.io/logo.png"/>
+
+<meta name="twitter:title" content="k9s入门教程"/>
+<meta name="twitter:description" content="K9s是一个基于终端的K8s UI管理工具。只需要一个二进制文件，就可以在任意的命令行终端上对K8s进行管理。这个工具的操作逻辑是基于Vim，"/>
+<meta name="application-name" content="池鱼的编程随想">
+<meta name="apple-mobile-web-app-title" content="池鱼的编程随想"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://bychannel.github.io/k9s%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/" /><link rel="prev" href="https://bychannel.github.io/top%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/" /><link rel="next" href="https://bychannel.github.io/%E5%AE%9A%E7%82%B9%E6%95%B0%E6%9D%82%E8%B0%88/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "k9s入门教程",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/bychannel.github.io\/k9s%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/bychannel.github.io\/images\/Apple-Devices-Preview.png",
+                            "width":  3200 ,
+                            "height":  2048 
+                        }],"genre": "posts","keywords": "k8s, 集群管理工具, k9s","wordcount":  2091 ,
+        "url": "https:\/\/bychannel.github.io\/k9s%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B\/","datePublished": "2023-01-16T10:30:57+08:00","dateModified": "2023-01-16T10:30:57+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/bychannel.github.io\/images\/avatar.png",
+                    "width":  528 ,
+                    "height":  560 
+                }},"author": {
+                "@type": "Person",
+                "name": "池鱼"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="池鱼的编程随想">池鱼的编程随想</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="https://github.com/bychannel" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw' aria-hidden='true'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="池鱼的编程随想">池鱼的编程随想</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="https://github.com/bychannel" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw' aria-hidden='true'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">k9s入门教程</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>池鱼</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/kubernetes/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>kubernetes</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-16">2023-01-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 2091 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 5 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#安装">安装</a></li>
+    <li><a href="#操作演示">操作演示</a></li>
+    <li><a href="#命令">命令</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>K9s是一个基于终端的K8s UI管理工具。只需要一个二进制文件，就可以在任意的命令行终端上对K8s进行管理。这个工具的操作逻辑是基于Vim，熟悉Vim的同学几分钟就能上手。</p>
+<h2 id="安装">安装</h2>
+<p>K9s支持Linux，macOS和Windows平台。推荐到官方<a href="https://github.com/derailed/k9s/releases" target="_blank" rel="noopener noreffer ">release</a>界面直接下载二进制文件。
+以CentOS为例，选择<code>k9s_linux_amd64.rpm</code>下载，然后上传到远程节点机器，使用<code>rpm -i k9s_linux_amd64.rpm</code>即可。</p>
+<p>与 kubectl 相同，K9s 启动时会读取默认的 kubeconfig。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@localhost ~]# k9s
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果有多个 config 文件，可以通过 &ndash;kubeconfig 指定。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@localhost ~]# k9s --kubeconfig=/srv/.kube/config
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="操作演示">操作演示</h2>
+<p>下面使用官方提供的deployment来演示一下K9s的常用操作</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">kubectl create -f https://k8s.io/examples/application/deployment.yaml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>创建好后，我们想要查看这个Deployment的状态。</p>
+<p>在终端输入k9s，进入Context的界面。</p>
+<img src="/images/k9s1.png">
+<p>通过方向键↑↓或者使用Vim的jk来选择部署的集群，ENTER进入集群。</p>
+<p>如果你看到的不是这个界面，你可以输入:ctx，再按下ENTER。这样也能达到上述的界面。</p>
+<p>K9s的基本命令与Vim的命令类似，通过冒号加资源类型:resource来定位到不同资源的浏览界面。</p>
+<p>Context的界面下一层是Pod。如果你的命名空间中的Pod太多，可以通过 /filter 的方式来过滤，例如输入 /nginx。</p>
+<img src="/images/k9s2.png">
+<p>当然你也可以先输入:deploy 跳转到Deployment的界面，选择Nginx对应的Deployment，再按ENTER进入查看Nginx下面所有的Pod。</p>
+<p>K9s内置了命令自动补全，例如输入de后，按Tab即可自动补全为deploy。</p>
+<img src="/images/k9s3.png">
+<p>此时我们可以看到Pod或者Deployment的状态。如果要看更详细的信息，可以选择快捷键d或者y，查看资源的详细信息或者是资源的Yaml描述文件</p>
+<img src="/images/k9s4.png">
+<p>浏览的时候也可以使用Page Down、Page Up、gG跳转到文件头尾等常用Vim操作，这里过滤器仍然适用</p>
+<p>查看完毕后使用ESC退回上一层。</p>
+<p>如果发现部署的配置不对，可以使用快捷键e进入Vim来修改资源的Yaml定义。</p>
+<p>几乎所有资源类型都能进行编辑。如果修改后的语法不正确，K9s会提示修改失败，修改不会生效。</p>
+<img src="/images/k9s5.png">
+<p>确认部署成功后我想看Nginx的日志，现在可以通过在Pod界面ENTER进入下一层的日志界面，又或者在Deployment或Pod界面使用快捷键l快速进入日志界面。</p>
+<p>因为示例的Nginx只会显示访问日志，这时候界面会提示Waiting for logs&hellip;.</p>
+<p>如果我们快速访问Nginx，该怎么做？在K9s里面有两种方式</p>
+<p>第一种是使用Shell，该命令等价于<code>kubectl exec pod /bin/sh</code>。先用ESC退回Pod界面，再按下s，就会进入到容器的Shell命令行。如果一个Pod包含了多个Container，则会进入Container界面让你选择要进入的Container。</p>
+<p>这种方式是就是当初K9s吸引我使用的地方，对比自己去拼命令，这个要快捷方便很多。</p>
+<p>接着输入<code>curl localhost:80</code>，但可惜的是镜像没有自带curl。</p>
+<p>那只有用第二种方法，port-forward。exit退出命令行界面输入快捷键Shift+f进入PortForward界面。</p>
+<img src="/images/k9s6.png">
+<p>这个就是对应<code>kubectl port-forward</code>命令。此时使用Tab进行上下切换。确认后本地开一个新的终端访问 <code>curl localhost:80</code>。</p>
+<p>port-forward在K9s关闭后就会失效</p>
+<p>现在回到日志界面就会看到新的日志。</p>
+<img src="/images/k9s7.png">
+<p>在日志界面的浏览和Vim浏览也一样，移动方式、过滤和上下跳转等操作都能适用。</p>
+<p>我一般在查看容器日志的时候会按 0和 w，0代表查看日志的尾部，即最新日志，w代表日志自动换行。</p>
+<p>除了上面的基本功能外，K9s还支持Node Shell(在Node界面按s进入该主机的容器)、xray(目录树的方式展示K8s资源)、压测等等功能，有兴趣可以到官网查看。</p>
+<p>以上就是我使用K9s常用到的操作技巧，最后放上K9s命令列表的中文翻译。</p>
+<h2 id="命令">命令</h2>
+<table>
+<thead>
+<tr>
+<th>动作</th>
+<th>命令</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>快捷键记录界面</td>
+<td>?</td>
+<td></td>
+</tr>
+<tr>
+<td>显示集群所有的资源和它们的缩写</td>
+<td>ctrl-a 或 :alias</td>
+<td>例如service的缩写是svc</td>
+</tr>
+<tr>
+<td>退出</td>
+<td>:q 或 ctrl-c</td>
+<td></td>
+</tr>
+<tr>
+<td>用资源名或者缩写来浏览某一类资源</td>
+<td>:po</td>
+<td>接受单数、复数、缩写或者别名。例如po,pod,pods,v1/pods</td>
+</tr>
+<tr>
+<td>在指定的ns里面浏览资源</td>
+<td>:po namespace</td>
+<td></td>
+</tr>
+<tr>
+<td>过滤某种资源</td>
+<td>/filter</td>
+<td>支持Regex2标准，例如<code>fred	blee</code>过滤名字是fred或者是blee的资源</td>
+</tr>
+<tr>
+<td>逆过滤器</td>
+<td>/!filter</td>
+<td>去除所有匹配的资源。不支持日志过滤</td>
+</tr>
+<tr>
+<td>根据labels过滤资源</td>
+<td>/-l label-selector</td>
+<td></td>
+</tr>
+<tr>
+<td>模糊匹配过滤</td>
+<td>/-f filter</td>
+<td></td>
+</tr>
+<tr>
+<td>退出 浏览/命令/过滤 模式</td>
+<td>esc</td>
+<td></td>
+</tr>
+<tr>
+<td>常用快捷键，describe, view,edit,view logs,…</td>
+<td>d,v,e,l,…</td>
+<td></td>
+</tr>
+<tr>
+<td>切换集群上下文</td>
+<td>:ctx</td>
+<td></td>
+</tr>
+<tr>
+<td>切换集群上下文</td>
+<td>:ctx context-name</td>
+<td></td>
+</tr>
+<tr>
+<td>切换namespace</td>
+<td>:ns</td>
+<td></td>
+</tr>
+<tr>
+<td>浏览所有保存的资源</td>
+<td>:screendump or sd</td>
+<td></td>
+</tr>
+<tr>
+<td>删除资源(TAB和ENTER来确认)</td>
+<td>ctrl-d</td>
+<td></td>
+</tr>
+<tr>
+<td>终止一种资源(不会有确认的对话框)</td>
+<td>ctrl-k</td>
+<td></td>
+</tr>
+<tr>
+<td>扩宽显示栏</td>
+<td>ctrl-w</td>
+<td>等价于kubectl &hellip; -o wide</td>
+</tr>
+<tr>
+<td>浏览在错误状态的资源</td>
+<td>ctrl-z</td>
+<td></td>
+</tr>
+<tr>
+<td>增强界面</td>
+<td>:pulses or pu</td>
+<td>用命令行实现类似GUI的监控界面</td>
+</tr>
+<tr>
+<td>XRay界面</td>
+<td>:xray RESOURCE [NAMESPACE]</td>
+<td>用目录树的结构来展示相关资源</td>
+</tr>
+<tr>
+<td>Popeye界面</td>
+<td>:popeye or pop</td>
+<td>Popeye是一个k8s清理工具，帮助找出有潜在问题的资源和配置，详见https://popeyecli.io/</td>
+</tr>
+</tbody>
+</table>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2023-01-16</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/k9s%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://bychannel.github.io/k9s%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/" data-title="k9s入门教程" data-hashtags="k8s,集群管理工具,k9s"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://bychannel.github.io/k9s%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/" data-hashtag="k8s"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://bychannel.github.io/k9s%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/" data-title="k9s入门教程"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://bychannel.github.io/k9s%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/" data-title="k9s入门教程"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://bychannel.github.io/k9s%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/" data-title="k9s入门教程"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/k8s/">k8s</a>,&nbsp;<a href="/tags/%E9%9B%86%E7%BE%A4%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/">集群管理工具</a>,&nbsp;<a href="/tags/k9s/">k9s</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/top%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/" class="prev" rel="prev" title="top命令详解"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>top命令详解</a>
+            <a href="/%E5%AE%9A%E7%82%B9%E6%95%B0%E6%9D%82%E8%B0%88/" class="next" rel="next" title="【转载】定点数杂谈">【转载】定点数杂谈<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="utterances" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.110.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">池鱼</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/algoliasearch@4.13.1/dist/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"comment","lightTheme":"github-light","repo":"bychannel/bychannel.github.io"}},"search":{"algoliaAppID":"PASDMWALPK","algoliaIndex":"index.zh-cn","algoliaSearchKey":"b42948e51daaa93df92381c8e2ac0f93","highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"algolia"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

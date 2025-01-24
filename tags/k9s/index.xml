@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>k9s - 标签 - 池鱼的编程随想</title>
+        <link>https://bychannel.github.io/tags/k9s/</link>
+        <description>k9s - 标签 - 池鱼的编程随想</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1132431868@qq.com (池鱼)</managingEditor>
+            <webMaster>1132431868@qq.com (池鱼)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 16 Jan 2023 10:30:57 &#43;0800</lastBuildDate><atom:link href="https://bychannel.github.io/tags/k9s/" rel="self" type="application/rss+xml" /><item>
+    <title>k9s入门教程</title>
+    <link>https://bychannel.github.io/k9s%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/</link>
+    <pubDate>Mon, 16 Jan 2023 10:30:57 &#43;0800</pubDate>
+    <author>池鱼</author>
+    <guid>https://bychannel.github.io/k9s%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/</guid>
+    <description><![CDATA[K9s是一个基于终端的K8s UI管理工具。只需要一个二进制文件，就可以在任意的命令行终端上对K8s进行管理。这个工具的操作逻辑是基于Vim，]]></description>
+</item>
+</channel>
+</rss>

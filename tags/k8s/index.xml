@@ -20,5 +20,13 @@
     <guid>https://bychannel.github.io/k8s%E9%83%A8%E7%BD%B2go%E5%BA%94%E7%94%A8%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/</guid>
     <description><![CDATA[k8s作为目前容器化管理和编排最热门的项目，我们无疑需要马上去学习它，而实践是能够帮助我们快速入门一项技术，在实践的过程中，我们可以理解大致]]></description>
 </item>
+<item>
+    <title>k9s入门教程</title>
+    <link>https://bychannel.github.io/k9s%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/</link>
+    <pubDate>Mon, 16 Jan 2023 10:30:57 &#43;0800</pubDate>
+    <author>池鱼</author>
+    <guid>https://bychannel.github.io/k9s%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/</guid>
+    <description><![CDATA[K9s是一个基于终端的K8s UI管理工具。只需要一个二进制文件，就可以在任意的命令行终端上对K8s进行管理。这个工具的操作逻辑是基于Vim，]]></description>
+</item>
 </channel>
 </rss>
