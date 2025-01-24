@@ -161,29 +161,22 @@
 </div>
 </div><p>创建好后，我们想要查看这个Deployment的状态。</p>
 <p>在终端输入k9s，进入Context的界面。</p>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="/images/k9s1.png"
-        data-srcset="/images/k9s1.png, /images/k9s1.png 1.5x, /images/k9s1.png 2x"
-        data-sizes="auto"
-        alt="/images/k9s1.png"
-        title="/images/k9s1.png" width="3360" height="2100" /></p>
+<img src="https://bychannel.github.io/images/k9s1.png">
 <p>通过方向键↑↓或者使用Vim的jk来选择部署的集群，ENTER进入集群。</p>
 <p>如果你看到的不是这个界面，你可以输入:ctx，再按下ENTER。这样也能达到上述的界面。</p>
 <p>K9s的基本命令与Vim的命令类似，通过冒号加资源类型:resource来定位到不同资源的浏览界面。</p>
 <p>Context的界面下一层是Pod。如果你的命名空间中的Pod太多，可以通过 /filter 的方式来过滤，例如输入 /nginx。</p>
-<img src="/images/k9s2.png">
+<img src="https://bychannel.github.io/images/k9s2.png">
 <p>当然你也可以先输入:deploy 跳转到Deployment的界面，选择Nginx对应的Deployment，再按ENTER进入查看Nginx下面所有的Pod。</p>
 <p>K9s内置了命令自动补全，例如输入de后，按Tab即可自动补全为deploy。</p>
-<img src="/images/k9s3.png">
+<img src="https://bychannel.github.io/images/k9s3.png">
 <p>此时我们可以看到Pod或者Deployment的状态。如果要看更详细的信息，可以选择快捷键d或者y，查看资源的详细信息或者是资源的Yaml描述文件</p>
-<img src="/images/k9s4.png">
+<img src="https://bychannel.github.io/images/k9s4.png">
 <p>浏览的时候也可以使用Page Down、Page Up、gG跳转到文件头尾等常用Vim操作，这里过滤器仍然适用</p>
 <p>查看完毕后使用ESC退回上一层。</p>
 <p>如果发现部署的配置不对，可以使用快捷键e进入Vim来修改资源的Yaml定义。</p>
 <p>几乎所有资源类型都能进行编辑。如果修改后的语法不正确，K9s会提示修改失败，修改不会生效。</p>
-<img src="/images/k9s5.png">
+<img src="https://bychannel.github.io/images/k9s5.png">
 <p>确认部署成功后我想看Nginx的日志，现在可以通过在Pod界面ENTER进入下一层的日志界面，又或者在Deployment或Pod界面使用快捷键l快速进入日志界面。</p>
 <p>因为示例的Nginx只会显示访问日志，这时候界面会提示Waiting for logs&hellip;.</p>
 <p>如果我们快速访问Nginx，该怎么做？在K9s里面有两种方式</p>
@@ -191,11 +184,11 @@
 <p>这种方式是就是当初K9s吸引我使用的地方，对比自己去拼命令，这个要快捷方便很多。</p>
 <p>接着输入<code>curl localhost:80</code>，但可惜的是镜像没有自带curl。</p>
 <p>那只有用第二种方法，port-forward。exit退出命令行界面输入快捷键Shift+f进入PortForward界面。</p>
-<img src="/images/k9s6.png">
+<img src="https://bychannel.github.io/images/k9s6.png">
 <p>这个就是对应<code>kubectl port-forward</code>命令。此时使用Tab进行上下切换。确认后本地开一个新的终端访问 <code>curl localhost:80</code>。</p>
 <p>port-forward在K9s关闭后就会失效</p>
 <p>现在回到日志界面就会看到新的日志。</p>
-<img src="/images/k9s7.png">
+<img src="https://bychannel.github.io/images/k9s7.png">
 <p>在日志界面的浏览和Vim浏览也一样，移动方式、过滤和上下跳转等操作都能适用。</p>
 <p>我一般在查看容器日志的时候会按 0和 w，0代表查看日志的尾部，即最新日志，w代表日志自动换行。</p>
 <p>除了上面的基本功能外，K9s还支持Node Shell(在Node界面按s进入该主机的容器)、xray(目录树的方式展示K8s资源)、压测等等功能，有兴趣可以到官网查看。</p>
