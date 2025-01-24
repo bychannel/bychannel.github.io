@@ -25,7 +25,7 @@ kubectl create -f https://k8s.io/examples/application/deployment.yaml
 
 在终端输入k9s，进入Context的界面。
 
-![](/images/k9s1.png)
+![](/images/xk9s1.png)
 
 通过方向键↑↓或者使用Vim的jk来选择部署的集群，ENTER进入集群。
 
@@ -35,17 +35,17 @@ K9s的基本命令与Vim的命令类似，通过冒号加资源类型:resource�
 
 Context的界面下一层是Pod。如果你的命名空间中的Pod太多，可以通过 /filter 的方式来过滤，例如输入 /nginx。
 
-![](/images/k9s2.png)
+![](/images/xk9s2.png)
 
 当然你也可以先输入:deploy 跳转到Deployment的界面，选择Nginx对应的Deployment，再按ENTER进入查看Nginx下面所有的Pod。
 
 K9s内置了命令自动补全，例如输入de后，按Tab即可自动补全为deploy。
 
-![](/images/k9s3.png)
+![](/images/xk9s3.png)
 
 此时我们可以看到Pod或者Deployment的状态。如果要看更详细的信息，可以选择快捷键d或者y，查看资源的详细信息或者是资源的Yaml描述文件
 
-![](/images/k9s4.png)
+![](/images/xk9s4.png)
 
 浏览的时候也可以使用Page Down、Page Up、gG跳转到文件头尾等常用Vim操作，这里过滤器仍然适用
 
@@ -55,7 +55,7 @@ K9s内置了命令自动补全，例如输入de后，按Tab即可自动补全为
 
 几乎所有资源类型都能进行编辑。如果修改后的语法不正确，K9s会提示修改失败，修改不会生效。
 
-![](/images/k9s5.png)
+![](/images/xk9s5.png)
 
 确认部署成功后我想看Nginx的日志，现在可以通过在Pod界面ENTER进入下一层的日志界面，又或者在Deployment或Pod界面使用快捷键l快速进入日志界面。
 
@@ -71,7 +71,7 @@ K9s内置了命令自动补全，例如输入de后，按Tab即可自动补全为
 
 那只有用第二种方法，port-forward。exit退出命令行界面输入快捷键Shift+f进入PortForward界面。
 
-![](/images/k9s6.png)
+![](/images/xk9s6.png)
 
 这个就是对应`kubectl port-forward`命令。此时使用Tab进行上下切换。确认后本地开一个新的终端访问 `curl localhost:80`。
 
@@ -79,7 +79,7 @@ port-forward在K9s关闭后就会失效
 
 现在回到日志界面就会看到新的日志。
 
-![](/images/k9s7.png)
+![](/images/xk9s7.png)
 
 在日志界面的浏览和Vim浏览也一样，移动方式、过滤和上下跳转等操作都能适用。
 
